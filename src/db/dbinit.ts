@@ -11,7 +11,8 @@ const sequelize = new Sequelize(
     {
         host: process.env.DB_HOST,
         dialect: 'postgres',
-        port: Number(process.env.DB_PORT)
+        port: Number(process.env.DB_PORT),
+        logging: false
     }
 );
 
@@ -20,9 +21,11 @@ initializeCS(sequelize);
 initializeConnector(sequelize);
 
 async function initializeDatabase() {
+    await ChargingStationType.sync();
+    await ChargingStation.sync();
+    await Connector.sync();
     try {
         const chargingStationTypesExist = await ChargingStationType.count();
-        console.log(chargingStationTypesExist !== 0);
 
         if (chargingStationTypesExist === 0) {
 
