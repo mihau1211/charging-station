@@ -3,8 +3,9 @@ import { ChargingStation } from './chargingStation.model';
 
 class Connector extends Model {
     public id!: string;
+    public name!: string;
+    public priority!: boolean;
     public chargingStationId!: string;
-    // Dodaj inne właściwości, które są potrzebne
 }
 
 const initialize = (sequelize: Sequelize) => {
