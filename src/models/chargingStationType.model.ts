@@ -8,7 +8,7 @@ class ChargingStationType extends Model {
     public current_type!: 'AC' | 'DC';
 }
 
-const initialize = (sequelize: Sequelize) => {
+const initialize = async (sequelize: Sequelize) => {
     ChargingStationType.init(
         {
             id: {
@@ -17,14 +17,28 @@ const initialize = (sequelize: Sequelize) => {
                 allowNull: false,
                 primaryKey: true
             },
-            name: DataTypes.STRING,
-            plug_count: DataTypes.INTEGER,
-            efficiency: DataTypes.FLOAT,
-            current_type: DataTypes.ENUM('AC', 'DC'),
+            name: {
+              type: DataTypes.STRING,
+              unique: true,
+              allowNull: false
+            },
+            plug_count: {
+              type: DataTypes.INTEGER,
+              allowNull: false
+            },
+            efficiency: {
+              type: DataTypes.FLOAT,
+              allowNull: false
+            },
+            current_type: {
+              type: DataTypes.ENUM('AC', 'DC'),
+              allowNull: false
+            }
         },
         {
             sequelize,
             modelName: 'ChargingStationType',
+            timestamps: false
         }
     );
 };
