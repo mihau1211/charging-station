@@ -48,8 +48,8 @@ async function initializeDatabase() {
         } else {
             logger.info('Database tables already exist. Skipping initialization.');
         }
-    } catch (err) {
-        logger.error('Unable to create Database and tables:', err);
+    } catch (error) {
+        logger.error(`Unable to create Database and tables: ${error}`);
     }
 }
 

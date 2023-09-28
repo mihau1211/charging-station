@@ -16,7 +16,19 @@ class Logger {
         });
     }
 
-    beginLogger(method: string, endpoint: string, body: any) {
+    info(message: string) {
+        this.logger.info(message);
+    }
+
+    error(message: string) {
+        this.logger.error(message);
+    }
+
+    warn(message: string) {
+        this.logger.warn(message);
+    }
+
+    beginLogger(method: string, endpoint: string, body?: any) {
         this.logger.info(`${method} request received at ${endpoint} ${!body ? '' : `with body: ${JSON.stringify(body)}`}`);
     }
 
@@ -28,15 +40,11 @@ class Logger {
         this.logger.error(`Error occurred while creating ${model}: ${errorMessage}`);
     }
 
-    getSuccessLogger(model: string, where: any, limit: string, offset: string) {
-        this.logger.info(`Fetching ${model} with conditions: ${JSON.stringify(where)}, limit: ${limit}, offset: ${offset}`);
+    getSuccessLogger(model: string, where: any, limit: number | undefined, offset: number | undefined) {
+        this.logger.info(`Fetching ${model} with conditions: ${JSON.stringify(where)} ${limit ? `, limit: ${limit}` : ''}${offset ? `, offset: ${offset}` : ''}`);
     }
 
     getErrorLogger(model: string, errorMessage: string) {
-        this.logger.error(`Error occurred while fetching ${model}: ${errorMessage}`);
-    }
-
-    getByIdErrorLogger(model: string, errorMessage: string) {
         this.logger.error(`Error occurred while fetching ${model}: ${errorMessage}`);
     }
 
