@@ -1,6 +1,5 @@
 import express, { Request, Response } from 'express';
 import { ChargingStation } from '../models/chargingStation.model';
-import { Op } from 'sequelize';
 import logger from '../utils/logger';
 import { ChargingStationType } from '../models/chargingStationType.model';
 import validator from 'validator';
@@ -51,11 +50,6 @@ router.get('/cs', async (req: Request, res: Response) => {
         if (req.query.firmware_version) where.firmware_version = req.query.firmware_version;
         if (req.query.charging_station_type_id) where.charging_station_type_id = req.query.charging_station_type_id;
 
-        if (req.query.minEfficiency && req.query.maxEfficiency) {
-            where.efficiency = { [Op.between]: [req.query.minEfficiency, req.query.maxEfficiency] };
-        }
-
-        logger.getSuccessLogger(chargingStationName + 's', where, limit, offset)
         const chargingStations = await ChargingStation.findAll({ where, limit, offset, include: 'charging_station_type' });
 
         if (chargingStations) {
@@ -64,6 +58,7 @@ router.get('/cs', async (req: Request, res: Response) => {
                 delete stationObj.charging_station_type_id;
                 return stationObj;
             })
+            logger.getSuccessLogger(chargingStationName + 's', where, limit, offset)
             res.json(response);
         }
     } catch (error: any) {
