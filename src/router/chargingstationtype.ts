@@ -2,7 +2,6 @@ import express, { Request, Response } from 'express';
 import { ChargingStationType } from '../models/chargingStationType.model';
 import { Op } from 'sequelize';
 import logger from '../utils/logger';
-import validator from 'validator';
 
 const router = express.Router();
 const chargingStationTypeName = ChargingStationType.name;
@@ -54,12 +53,8 @@ router.get('/cstype/:id', async (req: Request, res: Response) => {
         const { id } = req.params
         logger.beginLogger('GET', `/cstype/${id}`);
 
-        if (!validator.isUUID(id as string)) {
-            logger.invalidFieldsErrorLogger(`/cstype/${id}`);
-            return res.status(400).send({ error: 'Given UUID is invalid' });
-        }
-
         const chargingStationType = await ChargingStationType.findByPk(id);
+
         if (!chargingStationType) {
             logger.idNotFoundLogger(chargingStationTypeName, id);
             return res.status(404).send()
@@ -82,16 +77,20 @@ router.patch('/cstype/:id', async (req: Request, res: Response) => {
     logger.beginLogger('PATCH', `/cstype/${id}`, req.body);
 
     const isInvalidField = updateFields.some(field => !allowedFields.includes(field));
+
     if (isInvalidField) {
         logger.invalidFieldsErrorLogger(`/cstype/${id}`);
         return res.status(400).send({ error: 'Given fields are invalid' })
     }
+
     try {
         const updated = await ChargingStationType.update(req.body, { where: { id } })
+
         if (!updated[0]) {
             logger.idNotFoundLogger(chargingStationTypeName, id)
             return res.status(404).send();
         }
+
         logger.patchSuccessLogger(chargingStationTypeName, id);
         res.send();
     } catch (error: any) {
@@ -99,6 +98,7 @@ router.patch('/cstype/:id', async (req: Request, res: Response) => {
             logger.constraintViolationErrorLogger(chargingStationTypeName, id, error.message);
             return res.status(400).send({ error: 'Unique constraint violation.' })
         }
+
         logger.patchInternalErrorLogger(chargingStationTypeName, id, error.message);
         res.status(500).send({ error: 'Internal Server Error' });
     }
