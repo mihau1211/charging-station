@@ -1,11 +1,11 @@
-import { Model, DataTypes, Sequelize } from 'sequelize';
+import { Model, DataTypes, Sequelize, UUIDV4 } from 'sequelize';
 import { ChargingStation } from './chargingStation.model';
 
 class Connector extends Model {
     public id!: string;
     public name!: string;
     public priority!: boolean;
-    public chargingStationId!: string;
+    public charging_station!: ChargingStation;
 }
 
 const initialize = (sequelize: Sequelize) => {
@@ -13,24 +13,35 @@ const initialize = (sequelize: Sequelize) => {
         {
             id: {
                 type: DataTypes.UUID,
+                defaultValue: UUIDV4,
                 primaryKey: true,
+                allowNull: false,
             },
-            name: DataTypes.STRING,
-            priority: DataTypes.BOOLEAN,
-            chargingStationId: {
+            name: {
+                type: DataTypes.STRING,
+                unique: true,
+                allowNull: false
+            },
+            priority: {
+                type: DataTypes.BOOLEAN,
+                allowNull: false
+            },
+            charging_station_id: {
                 type: DataTypes.UUID,
+                allowNull: false,
                 references: { model: ChargingStation, key: 'id' }
             }
         },
         {
             sequelize,
             modelName: 'Connector',
+            timestamps: false
         }
     );
 
     Connector.belongsTo(ChargingStation, {
-        foreignKey: 'chargingStationId',
-        as: 'chargingStation',
+        foreignKey: 'charging_station_id',
+        as: 'charging_station',
     });
 };
 
