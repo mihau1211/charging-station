@@ -1,4 +1,4 @@
-import { Model, DataTypes, Sequelize } from 'sequelize';
+import { Model, DataTypes, Sequelize, UUIDV4 } from 'sequelize';
 import { ChargingStationType } from './chargingStationType.model';
 
 class ChargingStation extends Model {
@@ -15,26 +15,43 @@ const initialize = (sequelize: Sequelize) => {
         {
             id: {
                 type: DataTypes.UUID,
+                defaultValue: UUIDV4,
                 primaryKey: true,
+                allowNull: false,
             },
-            name: DataTypes.STRING,
-            device_id: DataTypes.UUID,
-            ip_address: DataTypes.STRING,
-            firmware_version: DataTypes.STRING,
-            chargingStationTypeId: {
+            name: {
+                type: DataTypes.STRING,
+                unique: true,
+                allowNull: false
+            },
+            device_id: {
                 type: DataTypes.UUID,
+                allowNull: false
+            },
+            ip_address: {
+                type: DataTypes.STRING,
+                allowNull: false
+            },
+            firmware_version: {
+                type: DataTypes.STRING,
+                allowNull: false
+            },
+            charging_station_type_id: {
+                type: DataTypes.UUID,
+                allowNull: false,
                 references: { model: ChargingStationType, key: 'id' }
             }
         },
         {
             sequelize,
             modelName: 'ChargingStation',
+            timestamps: false
         }
     );
 
-    ChargingStation.belongsTo(ChargingStation, {
-        foreignKey: 'chargingStationTypeId',
-        as: 'chargingStationType',
+    ChargingStation.belongsTo(ChargingStationType, {
+        foreignKey: 'charging_station_type_id',
+        as: 'charging_station_type',
     });
 };
 
