@@ -44,6 +44,10 @@ class Logger {
         this.logger.info(`Fetching ${model} with conditions: ${JSON.stringify(where)} ${limit ? `, limit: ${limit}` : ''}${offset ? `, offset: ${offset}` : ''}`);
     }
 
+    getByIdSuccessLogger(model: string, id: string) {
+        this.logger.info(`Fetching ${model} with id: ${id}`);
+    }
+
     getErrorLogger(model: string, errorMessage: string) {
         this.logger.error(`Error occurred while fetching ${model}: ${errorMessage}`);
     }
