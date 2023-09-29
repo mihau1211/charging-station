@@ -11,7 +11,7 @@ const priorityValidation = async (priority: boolean, chargingStationId: string, 
     if (priority) {
         const priorityConnectors = await Connector.findAll({ where: { priority: true, charging_station_id: chargingStationId } });
         if (priorityConnectors.length > 0) {
-            logger.error(errorMessage);
+            logger.error(errorMessage, 'API');
             return errorMessage;
         }
     }
@@ -24,7 +24,7 @@ const plugCountValidation = async (chargingStation: ChargingStation, chargingSta
 
     if (connectorsCount >= availableConnectorsCount) {
         const errorMessage = `Unable to add more connectors to ${chargingStationName} with id: ${chargingStationId}`;
-        logger.error(errorMessage);
+        logger.error(errorMessage, 'API');
         return errorMessage;
     }
     return '';

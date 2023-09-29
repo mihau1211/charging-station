@@ -30,7 +30,7 @@ async function initializeDatabase() {
         if (chargingStationTypesExist === 0) {
 
             await sequelize.sync({ force: false });
-            logger.info('Database and tables created!');
+            logger.info('Database and tables created!', 'DB');
 
             const defaultChargingStationTypes = [
                 { name: 'Type 1', plug_count: 2, efficiency: 0.9, current_type: 'AC' },
@@ -44,12 +44,12 @@ async function initializeDatabase() {
                 await ChargingStationType.findOrCreate({ where: { name: type.name }, defaults: type });
             }
 
-            logger.info('Default records created!');
+            logger.info('Default records created!', 'DB');
         } else {
-            logger.info('Database tables already exist. Skipping initialization.');
+            logger.info('Database tables already exist. Skipping initialization.', 'DB');
         }
     } catch (error) {
-        logger.error(`Unable to create Database and tables: ${error}`);
+        logger.error(`Unable to create Database and tables: ${error}`, 'DB');
     }
 }
 
