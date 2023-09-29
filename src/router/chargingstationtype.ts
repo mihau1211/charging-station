@@ -38,8 +38,8 @@ router.get('/cstype', async (req: Request, res: Response) => {
             where.efficiency = { [Op.between]: [req.query.minEfficiency, req.query.maxEfficiency] };
         }
 
-        logger.getSuccessLogger(chargingStationTypeName + 's', where, limit, offset)
         const chargingStationTypes = await ChargingStationType.findAll({ where, limit, offset });
+        logger.getSuccessLogger(chargingStationTypeName + 's', where, limit, offset)
         res.json(chargingStationTypes);
     } catch (error: any) {
         logger.getErrorLogger(chargingStationTypeName + 's', error.message);

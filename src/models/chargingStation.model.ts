@@ -7,7 +7,7 @@ class ChargingStation extends Model {
     public device_id!: string;
     public ip_address!: string;
     public firmware_version!: string;
-    public chargingStationTypeId!: string;
+    public charging_station_type!: ChargingStationType;
 }
 
 const initialize = (sequelize: Sequelize) => {
