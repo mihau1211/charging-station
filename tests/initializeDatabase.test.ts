@@ -1,46 +1,41 @@
-import path from 'path';
-import dotenv from 'dotenv';
-dotenv.config({ path: path.resolve(__dirname, '../test.env') });
 import { initializeDatabase, sequelize } from '../src/db/dbinit';
 import { ChargingStationType } from '../src/models/chargingStationType.model';
 import logger from '../src/utils/logger';
 
-describe('Database Initialization', () => {  
+jest.mock('../src/utils/logger', () => ({
+    info: jest.fn(),
+    error: jest.fn()
+}));
+
+describe('Database Initialization', () => {
   beforeAll(async () => {
-    await sequelize.sync({force: true});
-  });
-
-  it('should initialize database and create records if tables do not exist', async () => {
-    const logMock = jest.spyOn(logger, 'info').mockImplementation();
-    const errorMock = jest.spyOn(logger, 'error').mockImplementation();
+    process.env.DB_DATABASE = ':memory:';
+    process.env.DB_DIALECT = 'sqlite';
     
     await initializeDatabase();
-
-    const count = await ChargingStationType.count();
-    expect(count).toBe(5);
-
-    expect(logMock).toHaveBeenCalledWith('Database and tables created!');
-    expect(logMock).toHaveBeenCalledWith('Default records created!');
-    expect(errorMock).not.toHaveBeenCalled();
-
-    logMock.mockRestore();
-    errorMock.mockRestore();
   });
 
-  it('should not initialize database and create records if tables exist', async () => {
-    const logMock = jest.spyOn(logger, 'info').mockImplementation();
-    const errorMock = jest.spyOn(logger, 'error').mockImplementation();
-    
+  afterEach(() => {
+    jest.clearAllMocks();
+  })
+
+  afterAll(async () => {
+    await sequelize.close();
+  });
+
+  test('should initialize ChargingStationType table correctly', async () => {
+    const count = await ChargingStationType.count();
+    expect(count).toBe(5);
+    expect(logger.info).toHaveBeenCalledWith('Database and tables created!');
+    expect(logger.info).toHaveBeenCalledWith('Default records created!');
+  });
+
+  test('should not initialize ChargingStationType table and log info regarding skipping initialization', async () => {
     await initializeDatabase();
-
     const count = await ChargingStationType.count();
     expect(count).toBe(5);
-
-    expect(logMock).toHaveBeenCalledWith('Database tables already exist. Skipping initialization.');
-    expect(errorMock).not.toHaveBeenCalled();
-
-    logMock.mockRestore();
-    errorMock.mockRestore();
+    expect(logger.info).not.toHaveBeenCalledWith('Database and tables created!');
+    expect(logger.info).not.toHaveBeenCalledWith('Default records created!');
+    expect(logger.info).toHaveBeenCalledWith('Database tables already exist. Skipping initialization.');
   });
-
 });

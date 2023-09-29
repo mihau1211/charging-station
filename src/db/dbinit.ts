@@ -4,17 +4,23 @@ import { ChargingStation, initialize as initializeCS } from '../models/chargingS
 import { Connector, initialize as initializeConnector } from '../models/connector.model';
 import logger from '../utils/logger';
 
-const sequelize = new Sequelize(
-    process.env.DB_DATABASE as string,
-    process.env.DB_USERNAME as string,
-    process.env.DB_PASSWORD as string,
-    {
-        host: process.env.DB_HOST,
-        dialect: 'postgres',
-        port: Number(process.env.DB_PORT),
-        logging: false
-    }
-);
+let sequelize: Sequelize
+if (process.env.NODE_ENV === 'test') {
+    console.log('test if nodeenv is test')
+    sequelize = new Sequelize('sqlite::memory:', { logging: false })
+} else {
+    sequelize = new Sequelize(
+        process.env.DB_DATABASE as string,
+        process.env.DB_USERNAME as string,
+        process.env.DB_PASSWORD as string,
+        {
+            host: process.env.DB_HOST,
+            dialect: 'postgres',
+            port: Number(process.env.DB_PORT),
+            logging: false
+        }
+    );
+}
 
 initializeCSType(sequelize);
 initializeCS(sequelize);
@@ -30,7 +36,7 @@ async function initializeDatabase() {
         if (chargingStationTypesExist === 0) {
 
             await sequelize.sync({ force: false });
-            logger.info('Database and tables created!', 'DB');
+            logger.info('Database and tables created!');
 
             const defaultChargingStationTypes = [
                 { name: 'Type 1', plug_count: 2, efficiency: 0.9, current_type: 'AC' },
@@ -44,12 +50,12 @@ async function initializeDatabase() {
                 await ChargingStationType.findOrCreate({ where: { name: type.name }, defaults: type });
             }
 
-            logger.info('Default records created!', 'DB');
+            logger.info('Default records created!');
         } else {
-            logger.info('Database tables already exist. Skipping initialization.', 'DB');
+            logger.info('Database tables already exist. Skipping initialization.');
         }
     } catch (error) {
-        logger.error(`Unable to create Database and tables: ${error}`, 'DB');
+        logger.error(`Unable to create Database and tables: ${error}`);
     }
 }
 
