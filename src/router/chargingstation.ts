@@ -12,9 +12,16 @@ router.post('/cs', async (req: Request, res: Response) => {
     try {
         logger.beginLogger('POST', '/cs', req.body);
 
+        if (req.body.id && !validator.isUUID(req.body.id)) {
+            throw new Error('Provided id is not a valid UUID v4');
+        }
+
         if (!validator.isIP(req.body.ip_address)) {
-            logger.invalidFieldsErrorLogger(`/cs`);
-            return res.status(400).send({ error: 'Given ip_address is invalid' })
+            throw new Error('Given ip_address is invalid');
+        }
+
+        if (!validator.isUUID(req.body.device_id) || !validator.isUUID(req.body.charging_station_type_id)) {
+            throw new Error('Given device_id is invalid');
         }
 
         const csTypeId = req.body.charging_station_type_id;
@@ -73,7 +80,7 @@ router.get('/cs/:id', async (req: Request, res: Response) => {
         const { id } = req.params
         logger.beginLogger('GET', `/cs/${id}`);
 
-        const chargingStation = await ChargingStation.findByPk(id, {include: 'charging_station_type'});
+        const chargingStation = await ChargingStation.findByPk(id, { include: 'charging_station_type' });
 
         if (!chargingStation) {
             logger.idNotFoundLogger(chargingStationName, id);
@@ -99,9 +106,17 @@ router.patch('/cs/:id', async (req: Request, res: Response) => {
 
     logger.beginLogger('PATCH', `/cs/${id}`, req.body);
 
-    if (updateFields.includes('ip_address') && !validator.isIP(req.body.ip_address)) {
+    if (updateFields.includes('ip_address') && (typeof req.body.ip_address !== 'string' || !validator.isIP(req.body.ip_address))) {
         logger.invalidFieldsErrorLogger(`/cs`);
         return res.status(400).send({ error: 'Given ip_address is invalid' })
+    }
+
+    if (
+        (updateFields.includes('device_id') && !validator.isUUID(req.body.device_id)) ||
+        (updateFields.includes('charging_station_type_id') && !validator.isUUID(req.body.charging_station_type_id))
+    ) {
+        logger.invalidFieldsErrorLogger(`/cs`);
+        return res.status(400).send({ error: 'Given UUID is invalid' })
     }
 
     const isInvalidField = updateFields.some(field => !allowedFields.includes(field));
@@ -126,7 +141,7 @@ router.patch('/cs/:id', async (req: Request, res: Response) => {
             logger.constraintViolationErrorLogger(chargingStationName, id, error.message);
             return res.status(400).send({ error: 'Unique constraint violation.' })
         }
-        
+
         if (error.name === 'SequelizeValidationError') {
             logger.error(error.message, 'API');
             return res.status(400).send({ error: error.message })
