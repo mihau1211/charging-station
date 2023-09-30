@@ -33,10 +33,34 @@ const chargingStation3 = {
     firmware_version: 'V1'
 }
 
+const connector1 = {
+    name: "C 1",
+    priority: false
+}
+
+const connector2 = {
+    name: "C 2",
+    priority: true
+}
+
+const connector3 = {
+    name: "C 3",
+    priority: false
+}
+
+const connector4 = {
+    name: "C 4",
+    priority: false
+}
+
 export {
     chargingStationType1,
     chargingStationType2,
     chargingStation1,
     chargingStation2,
-    chargingStation3
+    chargingStation3,
+    connector1,
+    connector2,
+    connector3,
+    connector4
 }
