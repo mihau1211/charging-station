@@ -137,7 +137,7 @@ describe('Connector Router - POST', () => {
                 charging_station_id: chargingStation1Id
             });
 
-        expect(response.status).toBe(409);
+        expect(response.status).toBe(400);
     });
 });
 
@@ -316,7 +316,7 @@ describe('Charging Station Router - GET', () => {
                 charging_station_id: chargingStation1Id
             });
 
-        expect(response.status).toBe(409);
+        expect(response.status).toBe(400);
     });
 
     test('should update a specific connector by id when charging_station_id is valid and there is still non exceeded limit on charging station', async () => {
