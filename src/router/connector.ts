@@ -8,15 +8,13 @@ const router = express.Router();
 const connectorName = Connector.name;
 const chargingStationName = ChargingStation.name;
 
-const priorityValidation = async (priority: boolean, chargingStationId: string, errorMessage: string) => {
+const priorityValidation = async (priority: boolean, chargingStationId: string) => {
     if (priority) {
         const priorityConnectors = await Connector.findAll({ where: { priority: true, charging_station_id: chargingStationId } });
         if (priorityConnectors.length > 0) {
-            logger.error(errorMessage, 'API');
-            return errorMessage;
+            throw new Error(`Only 1 priority connector can be assigned to ${chargingStationName} with id: ${chargingStationId}.`)
         }
     }
-    return '';
 }
 
 const plugCountValidation = async (chargingStation: ChargingStation, chargingStationId: string, chargingStationName: string) => {
@@ -24,11 +22,8 @@ const plugCountValidation = async (chargingStation: ChargingStation, chargingSta
     const connectorsCount = (await Connector.findAndCountAll({ where: { charging_station_id: chargingStationId } })).count;
 
     if (connectorsCount >= availableConnectorsCount) {
-        const errorMessage = `Unable to add more connectors to ${chargingStationName} with id: ${chargingStationId}`;
-        logger.error(errorMessage, 'API');
-        return errorMessage;
+        throw new Error(`Unable to add more connectors to ${chargingStationName} with id: ${chargingStationId}`);
     }
-    return '';
 }
 
 // POST /connector
@@ -52,11 +47,9 @@ router.post('/connector', async (req: Request, res: Response) => {
             return res.status(422).send({ error: 'Given UUID does not exist or charging_station_type is missing' })
         }
 
-        const priorityValidationError = await priorityValidation(req.body.priority, chargingStationId, `Unable to create more than 1 priority connector to ${chargingStationName} with id: ${chargingStationId}.`)
-        if (priorityValidationError) return res.status(400).send({ priorityValidationError })
+        await priorityValidation(req.body.priority, chargingStationId);
 
-        const plugCountValidationMessage = await plugCountValidation(chargingStation, chargingStationId, chargingStationName);
-        if (plugCountValidationMessage) return res.status(409).send({ plugCountValidationMessage });
+        await plugCountValidation(chargingStation, chargingStationId, chargingStationName);
 
         await Connector.create(req.body);
 
@@ -146,29 +139,27 @@ router.patch('/connector/:id', async (req: Request, res: Response) => {
         return res.status(400).send({ error: 'Given UUID is invalid' })
     }
 
-    if (isUpdateChargingStation || isUpdatePriority) {
-        let chargingStationId;
-        if (!req.body.charging_station_id) {
-            const updatedConnector = await Connector.findByPk(id, { include: 'charging_station' });
-            chargingStationId = updatedConnector?.charging_station.id;
-        } else {
-            chargingStationId = req.body.charging_station_id
-        }
+    try {
+        if (isUpdateChargingStation || isUpdatePriority) {
+            let chargingStationId;
+            if (!req.body.charging_station_id) {
+                const updatedConnector = await Connector.findByPk(id, { include: 'charging_station' });
+                chargingStationId = updatedConnector?.charging_station.id;
+            } else {
+                chargingStationId = req.body.charging_station_id
+            }
 
-        const priorityValidationError = await priorityValidation(req.body.priority, chargingStationId, `Only 1 priority connector possible for ${chargingStationName} with id: ${chargingStationId}.`)
-        if (priorityValidationError) return res.status(400).send({ priorityValidationError })
+            await priorityValidation(req.body.priority, chargingStationId);
 
-        if (isUpdateChargingStation) {
-            const chargingStation = await ChargingStation.findByPk(chargingStationId, { include: 'charging_station_type' });
+            if (isUpdateChargingStation) {
+                const chargingStation = await ChargingStation.findByPk(chargingStationId, { include: 'charging_station_type' });
 
-            if (chargingStation) {
-                const plugCountValidationMessage = await plugCountValidation(chargingStation, chargingStationId, chargingStationName);
-                if (plugCountValidationMessage) return res.status(409).send({ plugCountValidationMessage });
+                if (chargingStation) {
+                    await plugCountValidation(chargingStation, chargingStationId, chargingStationName);
+                }
             }
         }
-    }
 
-    try {
         const updated = await Connector.update(req.body, { where: { id } })
 
         if (!updated[0]) {
@@ -184,7 +175,7 @@ router.patch('/connector/:id', async (req: Request, res: Response) => {
             return res.status(400).send({ error: 'Unique constraint violation.' })
         }
 
-        if (error.name === 'SequelizeValidationError') {
+        if (error.name === 'SequelizeValidationError' || error.name === 'Error') {
             logger.error(error.message, 'API');
             return res.status(400).send({ error: error.message })
         }
