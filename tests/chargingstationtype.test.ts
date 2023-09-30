@@ -46,7 +46,7 @@ describe('Charging Station Type Router - POST', () => {
         expect(response.status).toBe(400);
     });
 
-    test('should not create a new charging station when any field in body except id is empty', async () => {
+    test('should not create a new charging station type when any field in body except id is empty', async () => {
         const response = await request(app)
             .post(url)
             .send({
@@ -57,7 +57,7 @@ describe('Charging Station Type Router - POST', () => {
         expect(response.status).toBe(400);
     });
 
-    test('should not create a new charging station when plug_count is type of string', async () => {
+    test('should not create a new charging station type when plug_count is type of string', async () => {
         const response = await request(app)
             .post(url)
             .send({
@@ -70,7 +70,7 @@ describe('Charging Station Type Router - POST', () => {
         expect(response.status).toBe(400);
     });
 
-    test('should not create a new charging station when plug_count is type of float', async () => {
+    test('should not create a new charging station type when plug_count is type of float', async () => {
         const response = await request(app)
             .post(url)
             .send({
@@ -83,7 +83,7 @@ describe('Charging Station Type Router - POST', () => {
         expect(response.status).toBe(400);
     });
 
-    test('should not create a new charging station when efficiency is type of string', async () => {
+    test('should not create a new charging station type when efficiency is type of string', async () => {
         const response = await request(app)
             .post(url)
             .send({
@@ -96,7 +96,7 @@ describe('Charging Station Type Router - POST', () => {
         expect(response.status).toBe(400);
     });
 
-    test('should not create a new charging station when current_type value is not \'AC\' or \'DC\'', async () => {
+    test('should not create a new charging station type when current_type value is not \'AC\' or \'DC\'', async () => {
         const response = await request(app)
             .post(url)
             .send({
@@ -109,7 +109,7 @@ describe('Charging Station Type Router - POST', () => {
         expect(response.status).toBe(400);
     });
 
-    test('should create a new charging station when id is provided', async () => {
+    test('should create a new charging station type when id is provided', async () => {
         const response = await request(app)
             .post(url)
             .send({
@@ -123,7 +123,7 @@ describe('Charging Station Type Router - POST', () => {
         expect(response.status).toBe(201);
     });
 
-    test('should not create a new charging station when provided id is not type of UUIDV4', async () => {
+    test('should not create a new charging station type when provided id is not type of UUIDV4', async () => {
         const response = await request(app)
             .post(url)
             .send({
@@ -147,7 +147,7 @@ describe('Charging Station Type Router - GET', () => {
         expect(response.body.length).toBe(6);
     });
 
-    test('should get all charging station types with current_type equal to \'AC\'', async () => {
+    test('should get 4 charging station types with current_type equal to \'AC\'', async () => {
         const response = await request(app)
             .get(`${url}?current_type=AC`);
         expect(response.status).toBe(200);
