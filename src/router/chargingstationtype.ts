@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import { ChargingStationType } from '../models/chargingStationType.model';
 import { Op } from 'sequelize';
 import logger from '../utils/logger';
+import validator from 'validator';
 
 const router = express.Router();
 const chargingStationTypeName = ChargingStationType.name;
@@ -10,6 +11,9 @@ const chargingStationTypeName = ChargingStationType.name;
 router.post('/cstype', async (req: Request, res: Response) => {
     try {
         logger.beginLogger('POST', '/cstype', req.body);
+        if (req.body.id && !validator.isUUID(req.body.id)) {
+            throw new Error('Provided id is not a valid UUID v4');
+        }
         await ChargingStationType.create(req.body);
 
         logger.postSuccessLogger(chargingStationTypeName);
@@ -59,7 +63,7 @@ router.get('/cstype/:id', async (req: Request, res: Response) => {
             logger.idNotFoundLogger(chargingStationTypeName, id);
             return res.status(404).send()
         }
-        
+
         logger.getByIdSuccessLogger(chargingStationTypeName, id);
         res.json(chargingStationType);
     } catch (error: any) {
@@ -97,6 +101,10 @@ router.patch('/cstype/:id', async (req: Request, res: Response) => {
         if (error.name === 'SequelizeUniqueConstraintError') {
             logger.constraintViolationErrorLogger(chargingStationTypeName, id, error.message);
             return res.status(400).send({ error: 'Unique constraint violation.' })
+        }
+        if (error.name === 'SequelizeValidationError') {
+            logger.error(error.message, 'API');
+            return res.status(400).send({ error: error.message })
         }
 
         logger.patchInternalErrorLogger(chargingStationTypeName, id, error.message);
