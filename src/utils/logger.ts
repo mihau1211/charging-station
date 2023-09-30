@@ -17,15 +17,15 @@ class Logger {
     }
 
     info(message: string, context?: string) {
-        this.logger.info(message, context);
+        this.logger.info(message, { context });
     }
 
     error(message: string, context?: string) {
-        this.logger.error(message, context);
+        this.logger.error(message, { context });
     }
 
     warn(message: string, context?: string) {
-        this.logger.warn(message, context);
+        this.logger.warn(message, { context });
     }
 
     beginLogger(method: string, endpoint: string, body?: any, context?: string) {

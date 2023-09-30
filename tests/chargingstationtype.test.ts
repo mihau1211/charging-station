@@ -155,6 +155,14 @@ describe('Charging Station Type Router - GET', () => {
         expect(response.body.length).toBe(4);
     });
 
+    test('should get 2 charging station types with efficiency is equal to 0.7', async () => {
+        const response = await request(app)
+            .get(`${url}?efficiency=0.7`);
+        expect(response.status).toBe(200);
+        expect(Array.isArray(response.body)).toBeTruthy();
+        expect(response.body.length).toBe(1);
+    });
+
     test('should get 2 charging station types with efficiency between 0.4 and 0.7', async () => {
         const response = await request(app)
             .get(`${url}?minEfficiency=0.4&maxEfficiency=0.7`);
@@ -224,7 +232,10 @@ describe('Charging Station Type Router - PATCH', () => {
         const response = await request(app)
             .patch(`${url}/${chargingStationType1Id}`)
             .send({
-                name: 'Updated Type Test'
+                name: 'Updated Type Test',
+                plug_count: 5,
+                efficiency: 0.86,
+                current_type: 'AC'
             });
 
         expect(response.status).toBe(200);
@@ -235,6 +246,66 @@ describe('Charging Station Type Router - PATCH', () => {
             .patch(`${url}/${chargingStationType1Id}`)
             .send({
                 name: 'Type 1'
+            });
+
+        expect(response.status).toBe(400);
+    });
+
+    test('should not update a specific charging station type by id when id is provided', async () => {
+        const response = await request(app)
+            .patch(`${url}/${chargingStationType1Id}`)
+            .send({
+                id: '1e29cddf-d637-48f5-b672-e2634d9395c9'
+            });
+
+        expect(response.status).toBe(400);
+    });
+
+    test('should not update a specific charging station type by id when not exists', async () => {
+        const response = await request(app)
+            .patch(`${url}/1e29cddf-d637-48f5-b672-e2634d9395c9`)
+            .send({
+                name: 'new name'
+            });
+
+        expect(response.status).toBe(404);
+    });
+
+    test('should not update a specific charging station type by id when plug_count is string', async () => {
+        const response = await request(app)
+        .patch(`${url}/${chargingStationType1Id}`)
+            .send({
+                plug_count: 'plug count 1'
+            });
+
+        expect(response.status).toBe(400);
+    });
+
+    test('should not update a specific charging station type by id when plug_count is string', async () => {
+        const response = await request(app)
+        .patch(`${url}/${chargingStationType1Id}`)
+            .send({
+                plug_count: 1.1
+            });
+
+        expect(response.status).toBe(400);
+    });
+
+    test('should not update a specific charging station type by id when efficiency is string', async () => {
+        const response = await request(app)
+        .patch(`${url}/${chargingStationType1Id}`)
+            .send({
+                efficiency: 'plug count 1'
+            });
+
+        expect(response.status).toBe(400);
+    });
+
+    test('should not update a specific charging station type by id when current_type is not \'AC\' or \'DC\'', async () => {
+        const response = await request(app)
+        .patch(`${url}/${chargingStationType1Id}`)
+            .send({
+                current_type: 'AC\\DC'
             });
 
         expect(response.status).toBe(400);
