@@ -102,6 +102,7 @@ router.patch('/cstype/:id', async (req: Request, res: Response) => {
             logger.constraintViolationErrorLogger(chargingStationTypeName, id, error.message);
             return res.status(400).send({ error: 'Unique constraint violation.' })
         }
+        
         if (error.name === 'SequelizeValidationError') {
             logger.error(error.message, 'API');
             return res.status(400).send({ error: error.message })
