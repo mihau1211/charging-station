@@ -6,7 +6,6 @@ import logger from '../utils/logger';
 
 let sequelize: Sequelize
 if (process.env.NODE_ENV === 'test') {
-    console.log('test if nodeenv is test')
     sequelize = new Sequelize('sqlite::memory:', { logging: false })
 } else {
     sequelize = new Sequelize(

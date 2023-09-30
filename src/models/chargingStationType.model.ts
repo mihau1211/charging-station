@@ -24,15 +24,27 @@ const initialize = async (sequelize: Sequelize) => {
             },
             plug_count: {
               type: DataTypes.INTEGER,
-              allowNull: false
+              allowNull: false,
+              validate: {
+                isInt: { msg: 'plug_count must be an integer'}
+              }
             },
             efficiency: {
               type: DataTypes.FLOAT,
-              allowNull: false
+              allowNull: false,
+              validate: {
+                isFloat: { msg: 'efficiency must be a floating point number' }
+              }
             },
             current_type: {
               type: DataTypes.ENUM('AC', 'DC'),
-              allowNull: false
+              allowNull: false,
+              validate: {
+                isIn: {
+                    args: [['AC', 'DC']],
+                    msg: "current_type must be one of: AC, DC"
+                }
+              }
             }
         },
         {

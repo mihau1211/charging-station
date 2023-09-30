@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import { ChargingStationType } from '../models/chargingStationType.model';
 import { Op } from 'sequelize';
 import logger from '../utils/logger';
+import validator from 'validator';
 
 const router = express.Router();
 const chargingStationTypeName = ChargingStationType.name;
@@ -10,6 +11,9 @@ const chargingStationTypeName = ChargingStationType.name;
 router.post('/cstype', async (req: Request, res: Response) => {
     try {
         logger.beginLogger('POST', '/cstype', req.body);
+        if (req.body.id && !validator.isUUID(req.body.id)) {
+            throw new Error('Provided id is not a valid UUID v4');
+        }
         await ChargingStationType.create(req.body);
 
         logger.postSuccessLogger(chargingStationTypeName);
