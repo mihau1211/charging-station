@@ -246,7 +246,7 @@ describe('Charging Station Router - GET', () => {
 });
 
 describe('Charging Station Router - PATCH', () => {
-    test('should update a specific charging station type by id', async () => {
+    test('should update a specific charging station by id', async () => {
         const response = await request(app)
             .patch(`${url}/${chargingStation1Id}`)
             .send({

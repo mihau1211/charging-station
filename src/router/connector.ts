@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import { Connector } from '../models/connector.model';
 import logger from '../utils/logger';
 import { ChargingStation } from '../models/chargingStation.model';
+import validator from 'validator';
 
 const router = express.Router();
 const connectorName = Connector.name;
@@ -35,6 +36,14 @@ router.post('/connector', async (req: Request, res: Response) => {
     try {
         logger.beginLogger('POST', '/connector', req.body);
 
+        if (req.body.id && !validator.isUUID(req.body.id)) {
+            throw new Error('Provided id is not a valid UUID v4');
+        }
+
+        if (!validator.isUUID(req.body.charging_station_id)) {
+            throw new Error('Given UUID is invalid');
+        }
+
         const chargingStationId = req.body.charging_station_id;
         const chargingStation = await ChargingStation.findByPk(chargingStationId, { include: 'charging_station_type' });
 
@@ -67,6 +76,8 @@ router.get('/connector', async (req: Request, res: Response) => {
         const offset = parseInt(req.query.offset as string) || undefined;
 
         const where: any = {};
+
+        console.log(typeof req.query.priority)
 
         if (req.query.name) where.name = req.query.name;
         if (req.query.priority) where.priority = req.query.priority;
@@ -128,6 +139,11 @@ router.patch('/connector/:id', async (req: Request, res: Response) => {
     if (isInvalidField) {
         logger.invalidFieldsErrorLogger(`/connector/${id}`);
         return res.status(400).send({ error: 'Given fields are invalid' })
+    }
+
+    if ((updateFields.includes('charging_station_id') && !validator.isUUID(req.body.charging_station_id))) {
+        logger.invalidFieldsErrorLogger(`/cconnector`);
+        return res.status(400).send({ error: 'Given UUID is invalid' })
     }
 
     if (isUpdateChargingStation || isUpdatePriority) {

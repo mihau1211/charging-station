@@ -21,7 +21,7 @@ router.post('/cs', async (req: Request, res: Response) => {
         }
 
         if (!validator.isUUID(req.body.device_id) || !validator.isUUID(req.body.charging_station_type_id)) {
-            throw new Error('Given device_id is invalid');
+            throw new Error('Given UUID is invalid');
         }
 
         const csTypeId = req.body.charging_station_type_id;
