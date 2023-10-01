@@ -1,4 +1,5 @@
 import express, { Request, Response } from 'express';
+import { auth } from '../middleware/auth'
 import { ChargingStation } from '../models/chargingStation.model';
 import logger from '../utils/logger';
 import { ChargingStationType } from '../models/chargingStationType.model';
@@ -8,7 +9,7 @@ const router = express.Router();
 const chargingStationName = ChargingStation.name;
 
 // POST /cs
-router.post('/cs', async (req: Request, res: Response) => {
+router.post('/cs', auth, async (req: Request, res: Response) => {
     try {
         logger.beginLogger('POST', '/cs', req.body);
 
@@ -43,7 +44,7 @@ router.post('/cs', async (req: Request, res: Response) => {
 })
 
 // GET /cs
-router.get('/cs', async (req: Request, res: Response) => {
+router.get('/cs', auth, async (req: Request, res: Response) => {
     try {
         logger.beginLogger('GET', '/cs');
         const limit = parseInt(req.query.limit as string) || undefined;
@@ -75,7 +76,7 @@ router.get('/cs', async (req: Request, res: Response) => {
 })
 
 // GET /cs/:id
-router.get('/cs/:id', async (req: Request, res: Response) => {
+router.get('/cs/:id', auth, async (req: Request, res: Response) => {
     try {
         const { id } = req.params
         logger.beginLogger('GET', `/cs/${id}`);
@@ -99,7 +100,7 @@ router.get('/cs/:id', async (req: Request, res: Response) => {
 });
 
 // PATCH /cs/:id
-router.patch('/cs/:id', async (req: Request, res: Response) => {
+router.patch('/cs/:id', auth, async (req: Request, res: Response) => {
     const { id } = req.params;
     const allowedFields = ['name', 'device_id', 'ip_address', 'firmware_version', 'charging_station_type_id'];
     const updateFields = Object.keys(req.body);

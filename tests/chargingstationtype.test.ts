@@ -2,11 +2,17 @@ import request from 'supertest';
 import app from '../src/app';
 import { initializeDatabase, sequelize } from '../src/db/dbinit';
 import { UUIDV4 } from 'sequelize';
-import { chargingStationType1} from './fixtures/db';
+import { chargingStationType1 } from './fixtures/db';
 import { ChargingStationType } from '../src/models/chargingStationType.model';
 
 const url = '/cstype';
 let chargingStationType1Id: string;
+
+jest.mock('../src/middleware/auth', () => ({
+    auth: jest.fn((req, res, next) => next()),
+    refreshTokenAuth: jest.fn((req, res, next) => next()),
+    generateTokenAuth: jest.fn((req, res, next) => next()),
+}));
 
 beforeEach(async () => {
     await sequelize.sync({ force: true });
@@ -273,7 +279,7 @@ describe('Charging Station Type Router - PATCH', () => {
 
     test('should not update a specific charging station type by id when plug_count is string', async () => {
         const response = await request(app)
-        .patch(`${url}/${chargingStationType1Id}`)
+            .patch(`${url}/${chargingStationType1Id}`)
             .send({
                 plug_count: 'plug count 1'
             });
@@ -283,7 +289,7 @@ describe('Charging Station Type Router - PATCH', () => {
 
     test('should not update a specific charging station type by id when plug_count is string', async () => {
         const response = await request(app)
-        .patch(`${url}/${chargingStationType1Id}`)
+            .patch(`${url}/${chargingStationType1Id}`)
             .send({
                 plug_count: 1.1
             });
@@ -293,7 +299,7 @@ describe('Charging Station Type Router - PATCH', () => {
 
     test('should not update a specific charging station type by id when efficiency is string', async () => {
         const response = await request(app)
-        .patch(`${url}/${chargingStationType1Id}`)
+            .patch(`${url}/${chargingStationType1Id}`)
             .send({
                 efficiency: 'plug count 1'
             });
@@ -303,7 +309,7 @@ describe('Charging Station Type Router - PATCH', () => {
 
     test('should not update a specific charging station type by id when current_type is not \'AC\' or \'DC\'', async () => {
         const response = await request(app)
-        .patch(`${url}/${chargingStationType1Id}`)
+            .patch(`${url}/${chargingStationType1Id}`)
             .send({
                 current_type: 'AC\\DC'
             });

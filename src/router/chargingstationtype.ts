@@ -1,4 +1,5 @@
 import express, { Request, Response } from 'express';
+import { auth } from '../middleware/auth'
 import { ChargingStationType } from '../models/chargingStationType.model';
 import { Op } from 'sequelize';
 import logger from '../utils/logger';
@@ -8,7 +9,7 @@ const router = express.Router();
 const chargingStationTypeName = ChargingStationType.name;
 
 // POST /cstype
-router.post('/cstype', async (req: Request, res: Response) => {
+router.post('/cstype', auth, async (req: Request, res: Response) => {
     try {
         logger.beginLogger('POST', '/cstype', req.body);
         if (req.body.id && !validator.isUUID(req.body.id)) {
@@ -25,7 +26,7 @@ router.post('/cstype', async (req: Request, res: Response) => {
 })
 
 // GET /cstype
-router.get('/cstype', async (req: Request, res: Response) => {
+router.get('/cstype', auth, async (req: Request, res: Response) => {
     try {
         logger.beginLogger('GET', '/cstype')
         const limit = parseInt(req.query.limit as string) || undefined;
@@ -52,7 +53,7 @@ router.get('/cstype', async (req: Request, res: Response) => {
 })
 
 // GET /cstype/:id
-router.get('/cstype/:id', async (req: Request, res: Response) => {
+router.get('/cstype/:id', auth, async (req: Request, res: Response) => {
     try {
         const { id } = req.params
         logger.beginLogger('GET', `/cstype/${id}`);
@@ -73,7 +74,7 @@ router.get('/cstype/:id', async (req: Request, res: Response) => {
 });
 
 // PATCH /cstype/:id
-router.patch('/cstype/:id', async (req: Request, res: Response) => {
+router.patch('/cstype/:id', auth, async (req: Request, res: Response) => {
     const { id } = req.params;
     const allowedFields = ['name', 'plug_count', 'efficiency', 'current_type'];
     const updateFields = Object.keys(req.body);

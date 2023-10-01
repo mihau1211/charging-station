@@ -11,6 +11,12 @@ let chargingStationType1Id: string;
 let chargingStationType2Id: string;
 let chargingStation1Id: string;
 
+jest.mock('../src/middleware/auth', () => ({
+    auth: jest.fn((req, res, next) => next()),
+    refreshTokenAuth: jest.fn((req, res, next) => next()),
+    generateTokenAuth: jest.fn((req, res, next) => next()),
+}));
+
 beforeEach(async () => {
     await sequelize.sync({ force: true });
     await initializeDatabase();

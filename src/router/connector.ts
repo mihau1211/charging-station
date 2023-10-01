@@ -1,4 +1,5 @@
 import express, { Request, Response } from 'express';
+import { auth } from '../middleware/auth'
 import { Connector } from '../models/connector.model';
 import logger from '../utils/logger';
 import { ChargingStation } from '../models/chargingStation.model';
@@ -27,7 +28,7 @@ const plugCountValidation = async (chargingStation: ChargingStation, chargingSta
 }
 
 // POST /connector
-router.post('/connector', async (req: Request, res: Response) => {
+router.post('/connector', auth, async (req: Request, res: Response) => {
     try {
         logger.beginLogger('POST', '/connector', req.body);
 
@@ -62,7 +63,7 @@ router.post('/connector', async (req: Request, res: Response) => {
 })
 
 // GET /connector
-router.get('/connector', async (req: Request, res: Response) => {
+router.get('/connector', auth, async (req: Request, res: Response) => {
     try {
         logger.beginLogger('GET', '/connector');
         const limit = parseInt(req.query.limit as string) || undefined;
@@ -94,7 +95,7 @@ router.get('/connector', async (req: Request, res: Response) => {
 })
 
 // GET /connector/:id
-router.get('/connector/:id', async (req: Request, res: Response) => {
+router.get('/connector/:id', auth, async (req: Request, res: Response) => {
     try {
         const { id } = req.params
         logger.beginLogger('GET', `/connector/${id}`);
@@ -118,7 +119,7 @@ router.get('/connector/:id', async (req: Request, res: Response) => {
 });
 
 // PATCH /connector/:id
-router.patch('/connector/:id', async (req: Request, res: Response) => {
+router.patch('/connector/:id', auth, async (req: Request, res: Response) => {
     const { id } = req.params;
     const allowedFields = ['name', 'priority', 'charging_station_id'];
     const updateFields = Object.keys(req.body);

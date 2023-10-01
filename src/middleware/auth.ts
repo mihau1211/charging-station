@@ -1,19 +1,20 @@
 import { NextFunction } from 'express';
-import { cache } from '../app';
+import cache from '../utils/cache';
 import jwt from 'jsonwebtoken';
 
-const secret = process.env.JWT_SECRET;
-
-const isTokenExistInCache = (token: string) => {
+const validate = async (req: any) => {
+    const secret = process.env.JWT_SECRET;
+    if (!secret) throw new Error('JWT Secret is missing')
+    if (!req.header('Authorization')) throw new Error('Missing header');
+    const token = req.header('Authorization').replace('Bearer ', '');
     const isExist = cache.get(token);
     if (!isExist) throw new Error('Token is invalid');
+    return { token, secret };
 }
 
 const auth = async (req: any, res: any, next: NextFunction) => {
     try {
-        if (!secret) throw new Error('JWT Secret is missing')
-        const token = req.header('Authorization').replace('Bearer ', '');
-        isTokenExistInCache(token);
+        const { token, secret } = await validate(req);
         const decoded = jwt.verify(token, secret);
         if (typeof decoded === 'string') throw new Error();
         next();
@@ -24,9 +25,7 @@ const auth = async (req: any, res: any, next: NextFunction) => {
 
 const refreshTokenAuth = async (req: any, res: any, next: Function) => {
     try {
-        if (!secret) throw new Error('JWT Secret is missing')
-        const token = req.header('Authorization').replace('Bearer ', '');
-        isTokenExistInCache(token);
+        const { token, secret } = await validate(req);
         jwt.verify(token, secret, { ignoreExpiration: true });
         req.token = token;
         next();

@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import { cache } from '../app';
-import { refreshTokenAuth, generateTokenAuth, auth } from '../middleware/auth'
+import cache from '../utils/cache';
+import { refreshTokenAuth, generateTokenAuth } from '../middleware/auth'
 
 const router = express.Router();
 
