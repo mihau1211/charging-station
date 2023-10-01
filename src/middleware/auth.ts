@@ -1,12 +1,19 @@
 import { NextFunction } from 'express';
+import { cache } from '../app';
 import jwt from 'jsonwebtoken';
 
 const secret = process.env.JWT_SECRET;
 
+const isTokenExistInCache = (token: string) => {
+    const isExist = cache.get(token);
+    if (!isExist) throw new Error('Token is invalid');
+}
+
 const auth = async (req: any, res: any, next: NextFunction) => {
     try {
-        if (!secret) throw new Error('JWT Secret is missing!')
+        if (!secret) throw new Error('JWT Secret is missing')
         const token = req.header('Authorization').replace('Bearer ', '');
+        isTokenExistInCache(token);
         const decoded = jwt.verify(token, secret);
         if (typeof decoded === 'string') throw new Error();
         next();
@@ -17,9 +24,11 @@ const auth = async (req: any, res: any, next: NextFunction) => {
 
 const refreshTokenAuth = async (req: any, res: any, next: Function) => {
     try {
-        if (!secret) throw new Error('JWT Secret is missing!')
+        if (!secret) throw new Error('JWT Secret is missing')
         const token = req.header('Authorization').replace('Bearer ', '');
+        isTokenExistInCache(token);
         jwt.verify(token, secret, { ignoreExpiration: true });
+        req.token = token;
         next();
     } catch (error: any) {
         res.status(401).send({ error: error.message });
