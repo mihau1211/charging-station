@@ -76,7 +76,7 @@ router.get('/cstype/:id', auth, async (req: Request, res: Response) => {
 // PATCH /cstype/:id
 router.patch('/cstype/:id', auth, async (req: Request, res: Response) => {
     const { id } = req.params;
-    const allowedFields = ['name', 'plug_count', 'efficiency', 'current_type'];
+    const allowedFields = ['plug_count', 'efficiency', 'current_type'];
     const updateFields = Object.keys(req.body);
 
     logger.beginLogger('PATCH', `/cstype/${id}`, req.body);
@@ -98,12 +98,7 @@ router.patch('/cstype/:id', auth, async (req: Request, res: Response) => {
 
         logger.patchSuccessLogger(chargingStationTypeName, id);
         res.send();
-    } catch (error: any) {
-        if (error.name === 'SequelizeUniqueConstraintError') {
-            logger.constraintViolationErrorLogger(chargingStationTypeName, id, error.message);
-            return res.status(400).send({ error: 'Unique constraint violation.' })
-        }
-        
+    } catch (error: any) {        
         if (error.name === 'SequelizeValidationError') {
             logger.error(error.message, 'API');
             return res.status(400).send({ error: error.message })
