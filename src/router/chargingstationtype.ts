@@ -41,10 +41,7 @@ router.get('/cstype', auth, async (req: Request, res: Response) => {
 
 		if (req.query.minEfficiency && req.query.maxEfficiency) {
 			where.efficiency = {
-				[Op.between]: [
-					req.query.minEfficiency,
-					req.query.maxEfficiency,
-				],
+				[Op.between]: [req.query.minEfficiency, req.query.maxEfficiency],
 			};
 		}
 
@@ -53,12 +50,7 @@ router.get('/cstype', auth, async (req: Request, res: Response) => {
 			limit,
 			offset,
 		});
-		logger.getSuccessLogger(
-			chargingStationTypeName + 's',
-			where,
-			limit,
-			offset,
-		);
+		logger.getSuccessLogger(chargingStationTypeName + 's', where, limit, offset);
 		res.json(chargingStationTypes);
 	} catch (error: any) {
 		logger.getErrorLogger(chargingStationTypeName + 's', error.message);
@@ -95,9 +87,7 @@ router.patch('/cstype/:id', auth, async (req: Request, res: Response) => {
 
 	logger.beginLogger('PATCH', `/cstype/${id}`, req.body);
 
-	const isInvalidField = updateFields.some(
-		(field) => !allowedFields.includes(field),
-	);
+	const isInvalidField = updateFields.some((field) => !allowedFields.includes(field));
 
 	if (isInvalidField) {
 		logger.invalidFieldsErrorLogger(`/cstype/${id}`);
@@ -122,11 +112,7 @@ router.patch('/cstype/:id', auth, async (req: Request, res: Response) => {
 			return res.status(400).send({ error: error.message });
 		}
 
-		logger.patchInternalErrorLogger(
-			chargingStationTypeName,
-			id,
-			error.message,
-		);
+		logger.patchInternalErrorLogger(chargingStationTypeName, id, error.message);
 		res.status(500).send({ error: 'Internal Server Error' });
 	}
 });

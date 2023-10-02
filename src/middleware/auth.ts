@@ -38,10 +38,7 @@ const generateTokenAuth = async (req: any, res: any, next: Function) => {
 	const apiKey = req.header('x-api-key');
 	const validApiKey = process.env.API_KEY;
 
-	if (!validApiKey)
-		return res
-			.status(403)
-			.send({ error: 'No valid API key is set in the environment' });
+	if (!validApiKey) return res.status(403).send({ error: 'No valid API key is set in the environment' });
 
 	if (!apiKey || apiKey !== validApiKey) {
 		return res.status(403).send({ error: 'Invalid API Key' });

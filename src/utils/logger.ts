@@ -8,12 +8,7 @@ class Logger {
 			level: 'info',
 			format: winston.format.combine(
 				winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
-				winston.format.printf(
-					(info) =>
-						`[${info.timestamp}] [${info.level.toUpperCase()}] [${
-							info.context || 'APP'
-						}]: ${info.message}`,
-				),
+				winston.format.printf((info) => `[${info.timestamp}] [${info.level.toUpperCase()}] [${info.context || 'APP'}]: ${info.message}`),
 			),
 			transports: [new winston.transports.Console()],
 		});
@@ -27,18 +22,8 @@ class Logger {
 		this.logger.error(message, { context });
 	}
 
-	beginLogger(
-		method: string,
-		endpoint: string,
-		body?: any,
-		context?: string,
-	) {
-		this.logger.info(
-			`${method} request received at ${endpoint} ${
-				!body ? '' : `with body: ${JSON.stringify(body)}`
-			}`,
-			{ context: 'API' },
-		);
+	beginLogger(method: string, endpoint: string, body?: any, context?: string) {
+		this.logger.info(`${method} request received at ${endpoint} ${!body ? '' : `with body: ${JSON.stringify(body)}`}`, { context: 'API' });
 	}
 
 	postSuccessLogger(model: string, context?: string) {
@@ -46,23 +31,12 @@ class Logger {
 	}
 
 	postErrorLogger(model: string, errorMessage: string, context?: string) {
-		this.logger.error(
-			`Error occurred while creating ${model}: ${errorMessage}`,
-			{ context: 'API' },
-		);
+		this.logger.error(`Error occurred while creating ${model}: ${errorMessage}`, { context: 'API' });
 	}
 
-	getSuccessLogger(
-		model: string,
-		where: any,
-		limit: number | undefined,
-		offset: number | undefined,
-		context?: string,
-	) {
+	getSuccessLogger(model: string, where: any, limit: number | undefined, offset: number | undefined, context?: string) {
 		this.logger.info(
-			`Fetching ${model} with conditions: ${JSON.stringify(where)} ${
-				limit ? `, limit: ${limit}` : ''
-			}${offset ? `, offset: ${offset}` : ''}`,
+			`Fetching ${model} with conditions: ${JSON.stringify(where)} ${limit ? `, limit: ${limit}` : ''}${offset ? `, offset: ${offset}` : ''}`,
 			{ context: 'API' },
 		);
 	}
@@ -74,10 +48,7 @@ class Logger {
 	}
 
 	getErrorLogger(model: string, errorMessage: string, context?: string) {
-		this.logger.error(
-			`Error occurred while fetching ${model}: ${errorMessage}`,
-			{ context: 'API' },
-		);
+		this.logger.error(`Error occurred while fetching ${model}: ${errorMessage}`, { context: 'API' });
 	}
 
 	idNotFoundLogger(model: string, id: string, context?: string) {
@@ -98,16 +69,10 @@ class Logger {
 		});
 	}
 
-	patchInternalErrorLogger(
-		model: string,
-		id: string,
-		errorMessage: string,
-		context?: string,
-	) {
-		this.logger.error(
-			`Internal Server Error updating ${model} with id: ${id} - ${errorMessage}`,
-			{ context: 'API' },
-		);
+	patchInternalErrorLogger(model: string, id: string, errorMessage: string, context?: string) {
+		this.logger.error(`Internal Server Error updating ${model} with id: ${id} - ${errorMessage}`, {
+			context: 'API',
+		});
 	}
 }
 
