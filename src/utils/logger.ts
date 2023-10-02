@@ -24,10 +24,6 @@ class Logger {
         this.logger.error(message, { context });
     }
 
-    warn(message: string, context?: string) {
-        this.logger.warn(message, { context });
-    }
-
     beginLogger(method: string, endpoint: string, body?: any, context?: string) {
         this.logger.info(`${method} request received at ${endpoint} ${!body ? '' : `with body: ${JSON.stringify(body)}`}`, { context: 'API' });
     }
@@ -62,10 +58,6 @@ class Logger {
 
     patchSuccessLogger(model: string, id: string, context?: string) {
         this.logger.info(`${model} with id: ${id} successfully updated`, { context: 'API' });
-    }
-
-    constraintViolationErrorLogger(model: string, id: string, errorMessage: string, context?: string) {
-        this.logger.error(`Unique constraint violation updating ${model} with id: ${id} - ${errorMessage}`, { context: 'API' });
     }
 
     patchInternalErrorLogger(model: string, id: string, errorMessage: string, context?: string) {

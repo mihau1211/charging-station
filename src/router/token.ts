@@ -27,7 +27,7 @@ router.post('/refreshtoken', refreshTokenAuth, async (req: RequestWithToken, res
     try {
         if (!secret) throw new Error('JWT Secret is missing');
         if (!req.token) throw new Error('Token is missing in request');
-
+      
         const token = jwt.sign({ key: Math.random() }, secret, { expiresIn: '120s' });
         cache.del(req.token)
         cache.set(token, 'true')

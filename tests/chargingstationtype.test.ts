@@ -238,23 +238,12 @@ describe('Charging Station Type Router - PATCH', () => {
         const response = await request(app)
             .patch(`${url}/${chargingStationType1Id}`)
             .send({
-                name: 'Updated Type Test',
                 plug_count: 5,
                 efficiency: 0.86,
                 current_type: 'AC'
             });
 
         expect(response.status).toBe(200);
-    });
-
-    test('should not update a specific charging station type by id when provided name is not unique', async () => {
-        const response = await request(app)
-            .patch(`${url}/${chargingStationType1Id}`)
-            .send({
-                name: 'Type 1'
-            });
-
-        expect(response.status).toBe(400);
     });
 
     test('should not update a specific charging station type by id when id is provided', async () => {
@@ -271,7 +260,7 @@ describe('Charging Station Type Router - PATCH', () => {
         const response = await request(app)
             .patch(`${url}/1e29cddf-d637-48f5-b672-e2634d9395c9`)
             .send({
-                name: 'new name'
+                plug_count: 1
             });
 
         expect(response.status).toBe(404);
@@ -287,7 +276,7 @@ describe('Charging Station Type Router - PATCH', () => {
         expect(response.status).toBe(400);
     });
 
-    test('should not update a specific charging station type by id when plug_count is string', async () => {
+    test('should not update a specific charging station type by id when plug_count is float', async () => {
         const response = await request(app)
             .patch(`${url}/${chargingStationType1Id}`)
             .send({
