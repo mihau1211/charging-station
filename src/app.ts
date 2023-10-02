@@ -1,11 +1,11 @@
-import express from 'express'
+import express from 'express';
 import { initializeDatabase } from './db/dbinit';
 import chargingStationTypeRouter from './router/chargingstationtype';
 import chargingStationRouter from './router/chargingstation';
 import connectorRouter from './router/connector';
 import tokenRouter from './router/token';
 
-const app = express()
+const app = express();
 
 initializeDatabase();
 
