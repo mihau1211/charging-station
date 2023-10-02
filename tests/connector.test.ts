@@ -233,32 +233,11 @@ describe('Charging Station Router - GET', () => {
         const response = await request(app)
             .patch(`${url}/${connector1Id}`)
             .send({
-                name: 'Updated Connector Test',
                 priority: false,
                 charging_station_id: chargingStation1Id
             });
 
         expect(response.status).toBe(200);
-    });
-
-    test('should not update a specific connector by id when provided name is not unique', async () => {
-        const response = await request(app)
-            .patch(`${url}/${connector1Id}`)
-            .send({
-                name: 'C 2'
-            });
-
-        expect(response.status).toBe(400);
-    });
-
-    test('should not update a specific connector by id when id is provided', async () => {
-        const response = await request(app)
-            .patch(`${url}/${connector1Id}`)
-            .send({
-                id: '1b29634d-a62a-4dac-8586-f0946c72e0aa'
-            });
-
-        expect(response.status).toBe(400);
     });
 
     test('should not update a specific connector by id when id is provided', async () => {
@@ -275,7 +254,7 @@ describe('Charging Station Router - GET', () => {
         const response = await request(app)
             .patch(`${url}/1b29634d-a62a-4dac-8586-f0946c72e0aa`)
             .send({
-                name: 'new name'
+                priority: false
             });
 
         expect(response.status).toBe(404);

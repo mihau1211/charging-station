@@ -102,7 +102,7 @@ router.get('/cs/:id', auth, async (req: Request, res: Response) => {
 // PATCH /cs/:id
 router.patch('/cs/:id', auth, async (req: Request, res: Response) => {
     const { id } = req.params;
-    const allowedFields = ['name', 'device_id', 'ip_address', 'firmware_version', 'charging_station_type_id'];
+    const allowedFields = ['device_id', 'ip_address', 'firmware_version', 'charging_station_type_id'];
     const updateFields = Object.keys(req.body);
 
     logger.beginLogger('PATCH', `/cs/${id}`, req.body);
@@ -138,11 +138,6 @@ router.patch('/cs/:id', auth, async (req: Request, res: Response) => {
         logger.patchSuccessLogger(chargingStationName, id);
         res.send();
     } catch (error: any) {
-        if (error.name === 'SequelizeUniqueConstraintError') {
-            logger.constraintViolationErrorLogger(chargingStationName, id, error.message);
-            return res.status(400).send({ error: 'Unique constraint violation.' })
-        }
-
         if (error.name === 'SequelizeValidationError') {
             logger.error(error.message, 'API');
             return res.status(400).send({ error: error.message })

@@ -49,7 +49,7 @@ describe('Charging Station Router - POST', () => {
         expect(response.status).toBe(201);
     });
 
-    test('should not create a new charging station', async () => {
+    test('should not create a new charging station when name is not unique', async () => {
         const response = await request(app)
             .post(url)
             .send({
@@ -256,7 +256,6 @@ describe('Charging Station Router - PATCH', () => {
         const response = await request(app)
             .patch(`${url}/${chargingStation1Id}`)
             .send({
-                name: 'Updated Charging Station Test',
                 device_id: '1b29634d-a62a-4dac-8586-f0946c72e0a1',
                 ip_address: '127.0.0.1',
                 firmware_version: 'V2',
@@ -264,16 +263,6 @@ describe('Charging Station Router - PATCH', () => {
             });
 
         expect(response.status).toBe(200);
-    });
-
-    test('should not update a specific charging station by id when provided name is not unique', async () => {
-        const response = await request(app)
-            .patch(`${url}/${chargingStation1Id}`)
-            .send({
-                name: 'CS 2'
-            });
-
-        expect(response.status).toBe(400);
     });
 
     test('should not update a specific charging station by id when id is provided', async () => {
@@ -290,7 +279,7 @@ describe('Charging Station Router - PATCH', () => {
         const response = await request(app)
             .patch(`${url}/1e29cddf-d637-48f5-b672-e2634d9395c9`)
             .send({
-                name: 'new name'
+                firmware_version: 'V3'
             });
 
         expect(response.status).toBe(404);
