@@ -1,4 +1,6 @@
 import express from 'express';
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from './docs/swagger';
 import { initializeDatabase } from './db/dbinit';
 import chargingStationTypeRouter from './router/chargingstationtype';
 import chargingStationRouter from './router/chargingstation';
@@ -14,5 +16,6 @@ app.use(chargingStationTypeRouter);
 app.use(chargingStationRouter);
 app.use(connectorRouter);
 app.use(tokenRouter);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 export default app;

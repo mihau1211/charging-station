@@ -9,6 +9,27 @@ interface RequestWithToken extends Request {
 	token?: string;
 }
 
+/**
+ * @swagger
+ * /generatetoken:
+ *   post:
+ *     tags:
+ *       - Authentication
+ *     summary: Generates a new token
+ *     security:
+ *       - apikeyAuth: []
+ *     responses:
+ *       200:
+ *         description: A successful response with JWT token
+ *         content:
+ *           application/json:
+ *             example:
+ *               token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+ *       400:
+ *         description: Bad Request, errors in response body
+ *       403:
+ *         description: Forbidden
+ */
 router.post('/generatetoken', generateTokenAuth, async (req: Request, res: Response) => {
 	const secret = process.env.JWT_SECRET;
 	try {
@@ -23,6 +44,27 @@ router.post('/generatetoken', generateTokenAuth, async (req: Request, res: Respo
 	}
 });
 
+/**
+ * @swagger
+ * /refreshtoken:
+ *   post:
+ *     tags:
+ *       - Authentication
+ *     summary: Refreshes the token
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+*       200:
+ *         description: A successful response with JWT token
+ *         content:
+ *           application/json:
+ *             example:
+ *               token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+ *       400:
+ *         description: Bad Request, errors in response body
+ *       401:
+ *         description: Unauthorized
+ */
 router.post('/refreshtoken', refreshTokenAuth, async (req: RequestWithToken, res: Response) => {
 	const secret = process.env.JWT_SECRET;
 	try {
