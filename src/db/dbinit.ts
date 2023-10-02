@@ -1,33 +1,19 @@
 import { Sequelize } from 'sequelize';
-import {
-	ChargingStationType,
-	initialize as initializeCSType,
-} from '../models/chargingStationType.model';
-import {
-	ChargingStation,
-	initialize as initializeCS,
-} from '../models/chargingStation.model';
-import {
-	Connector,
-	initialize as initializeConnector,
-} from '../models/connector.model';
+import { ChargingStationType, initialize as initializeCSType } from '../models/chargingStationType.model';
+import { ChargingStation, initialize as initializeCS } from '../models/chargingStation.model';
+import { Connector, initialize as initializeConnector } from '../models/connector.model';
 import logger from '../utils/logger';
 
 let sequelize: Sequelize;
 if (process.env.NODE_ENV === 'test') {
 	sequelize = new Sequelize('sqlite::memory:', { logging: false });
 } else {
-	sequelize = new Sequelize(
-		process.env.DB_DATABASE as string,
-		process.env.DB_USERNAME as string,
-		process.env.DB_PASSWORD as string,
-		{
-			host: process.env.DB_HOST,
-			dialect: 'postgres',
-			port: Number(process.env.DB_PORT),
-			logging: false,
-		},
-	);
+	sequelize = new Sequelize(process.env.DB_DATABASE as string, process.env.DB_USERNAME as string, process.env.DB_PASSWORD as string, {
+		host: process.env.DB_HOST,
+		dialect: 'postgres',
+		port: Number(process.env.DB_PORT),
+		logging: false,
+	});
 }
 
 initializeCSType(sequelize);
@@ -87,9 +73,7 @@ async function initializeDatabase() {
 
 			logger.info('Default records created!');
 		} else {
-			logger.info(
-				'Database tables already exist. Skipping initialization.',
-			);
+			logger.info('Database tables already exist. Skipping initialization.');
 		}
 	} catch (error) {
 		logger.error(`Unable to create Database and tables: ${error}`);

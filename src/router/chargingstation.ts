@@ -21,10 +21,7 @@ router.post('/cs', auth, async (req: Request, res: Response) => {
 			throw new Error('Given ip_address is invalid');
 		}
 
-		if (
-			!validator.isUUID(req.body.device_id) ||
-			!validator.isUUID(req.body.charging_station_type_id)
-		) {
+		if (!validator.isUUID(req.body.device_id) || !validator.isUUID(req.body.charging_station_type_id)) {
 			throw new Error('Given UUID is invalid');
 		}
 
@@ -58,10 +55,8 @@ router.get('/cs', auth, async (req: Request, res: Response) => {
 		if (req.query.name) where.name = req.query.name;
 		if (req.query.device_id) where.device_id = req.query.device_id;
 		if (req.query.ip_address) where.ip_address = req.query.ip_address;
-		if (req.query.firmware_version)
-			where.firmware_version = req.query.firmware_version;
-		if (req.query.charging_station_type_id)
-			where.charging_station_type_id = req.query.charging_station_type_id;
+		if (req.query.firmware_version) where.firmware_version = req.query.firmware_version;
+		if (req.query.charging_station_type_id) where.charging_station_type_id = req.query.charging_station_type_id;
 
 		const chargingStations = await ChargingStation.findAll({
 			where,
@@ -76,12 +71,7 @@ router.get('/cs', auth, async (req: Request, res: Response) => {
 				delete stationObj.charging_station_type_id;
 				return stationObj;
 			});
-			logger.getSuccessLogger(
-				chargingStationName + 's',
-				where,
-				limit,
-				offset,
-			);
+			logger.getSuccessLogger(chargingStationName + 's', where, limit, offset);
 			res.json(response);
 		}
 	} catch (error: any) {
@@ -119,38 +109,25 @@ router.get('/cs/:id', auth, async (req: Request, res: Response) => {
 // PATCH /cs/:id
 router.patch('/cs/:id', auth, async (req: Request, res: Response) => {
 	const { id } = req.params;
-	const allowedFields = [
-		'device_id',
-		'ip_address',
-		'firmware_version',
-		'charging_station_type_id',
-	];
+	const allowedFields = ['device_id', 'ip_address', 'firmware_version', 'charging_station_type_id'];
 	const updateFields = Object.keys(req.body);
 
 	logger.beginLogger('PATCH', `/cs/${id}`, req.body);
 
-	if (
-		updateFields.includes('ip_address') &&
-		(typeof req.body.ip_address !== 'string' ||
-			!validator.isIP(req.body.ip_address))
-	) {
+	if (updateFields.includes('ip_address') && (typeof req.body.ip_address !== 'string' || !validator.isIP(req.body.ip_address))) {
 		logger.invalidFieldsErrorLogger(`/cs`);
 		return res.status(400).send({ error: 'Given ip_address is invalid' });
 	}
 
 	if (
-		(updateFields.includes('device_id') &&
-			!validator.isUUID(req.body.device_id)) ||
-		(updateFields.includes('charging_station_type_id') &&
-			!validator.isUUID(req.body.charging_station_type_id))
+		(updateFields.includes('device_id') && !validator.isUUID(req.body.device_id)) ||
+		(updateFields.includes('charging_station_type_id') && !validator.isUUID(req.body.charging_station_type_id))
 	) {
 		logger.invalidFieldsErrorLogger(`/cs`);
 		return res.status(400).send({ error: 'Given UUID is invalid' });
 	}
 
-	const isInvalidField = updateFields.some(
-		(field) => !allowedFields.includes(field),
-	);
+	const isInvalidField = updateFields.some((field) => !allowedFields.includes(field));
 
 	if (isInvalidField) {
 		logger.invalidFieldsErrorLogger(`/cs/${id}`);
