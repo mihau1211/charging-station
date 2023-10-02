@@ -5,16 +5,15 @@ import { refreshTokenAuth, generateTokenAuth } from '../middleware/auth'
 
 const router = express.Router();
 
-const secret = process.env.JWT_SECRET;
-
 interface RequestWithToken extends Request {
     token?: string;
-  }
+}
 
 router.post('/generatetoken', generateTokenAuth, async (req: Request, res: Response) => {
+    const secret = process.env.JWT_SECRET;
     try {
         if (!secret) throw new Error('JWT Secret is missing');
-        const token = jwt.sign({ key: Math.random() }, secret, { expiresIn: '20s' });
+        const token = jwt.sign({ key: Math.random() }, secret, { expiresIn: '120s' });
         cache.set(token, 'true');
         res.send({ token });
     } catch (error: any) {
@@ -24,11 +23,12 @@ router.post('/generatetoken', generateTokenAuth, async (req: Request, res: Respo
 })
 
 router.post('/refreshtoken', refreshTokenAuth, async (req: RequestWithToken, res: Response) => {
+    const secret = process.env.JWT_SECRET;
     try {
         if (!secret) throw new Error('JWT Secret is missing');
         if (!req.token) throw new Error('Token is missing in request');
-
-        const token = jwt.sign({ key: Math.random() }, secret, { expiresIn: '20s' });
+      
+        const token = jwt.sign({ key: Math.random() }, secret, { expiresIn: '120s' });
         cache.del(req.token)
         cache.set(token, 'true')
         res.send({ token: token });
