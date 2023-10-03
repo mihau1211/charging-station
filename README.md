@@ -14,7 +14,9 @@ POSTGRES_PASSWORD: [password]
 POSTGRES_DB: [db_name]
 ```
 2. **Fill in environment variables**: Fill in predefined prod.env file, make sure that db variables (as password, username and so on) are exact the same like those that you provide to PostgreSQL config.
-3. **Build and Run the Docker Containers**: Execute the `docker-compose up` command in your terminal to build and run the project. Ensure Docker is installed on your device before running the command.
+3. **Install rimraf**: Run `npm i rimraf` to install rimraf package.
+4. **Initialize build directory**: Run `npm run build` on project root directory to initialize .js files.
+5. **Build and Run the Docker Containers**: Execute the `docker-compose up` command in your terminal to build and run the project. Ensure Docker is installed on your device before running the command.
 
 ## Accessing the Application
 1. **Generate First Token**: Use /api/v1/generatetoken endpoint to generate token, it requires API Key to work.
