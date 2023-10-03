@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1696317006505" clover="3.2.0">
+  <project timestamp="1696317006505" name="All files">
+    <metrics statements="425" coveredstatements="400" conditionals="112" coveredconditionals="106" methods="64" coveredmethods="62" elements="601" coveredelements="568" complexity="0" loc="425" ncloc="425" packages="8" files="14" classes="14"/>
+    <package name="src">
+      <metrics statements="17" coveredstatements="17" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="app.ts" path="C:\Users\mwrobel\OneDrive - TRANSITION TECHNOLOGIES PSC S.A\Desktop\magisterka\charging-station\src\app.ts">
+        <metrics statements="17" coveredstatements="17" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="4" type="stmt"/>
+        <line num="2" count="4" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="4" count="4" type="stmt"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="7" count="4" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
+        <line num="10" count="4" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
+        <line num="14" count="4" type="stmt"/>
+        <line num="15" count="4" type="stmt"/>
+        <line num="16" count="4" type="stmt"/>
+        <line num="17" count="4" type="stmt"/>
+        <line num="18" count="4" type="stmt"/>
+        <line num="19" count="4" type="stmt"/>
+        <line num="21" count="4" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.db">
+      <metrics statements="26" coveredstatements="25" conditionals="4" coveredconditionals="3" methods="1" coveredmethods="1"/>
+      <file name="dbinit.ts" path="C:\Users\mwrobel\OneDrive - TRANSITION TECHNOLOGIES PSC S.A\Desktop\magisterka\charging-station\src\db\dbinit.ts">
+        <metrics statements="26" coveredstatements="25" conditionals="4" coveredconditionals="3" methods="1" coveredmethods="1"/>
+        <line num="1" count="5" type="stmt"/>
+        <line num="2" count="5" type="stmt"/>
+        <line num="3" count="5" type="stmt"/>
+        <line num="4" count="5" type="stmt"/>
+        <line num="5" count="5" type="stmt"/>
+        <line num="8" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="9" count="5" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="19" count="5" type="stmt"/>
+        <line num="20" count="5" type="stmt"/>
+        <line num="21" count="5" type="stmt"/>
+        <line num="24" count="86" type="stmt"/>
+        <line num="25" count="86" type="stmt"/>
+        <line num="26" count="86" type="stmt"/>
+        <line num="27" count="86" type="stmt"/>
+        <line num="28" count="86" type="stmt"/>
+        <line num="30" count="86" type="cond" truecount="2" falsecount="0"/>
+        <line num="31" count="82" type="stmt"/>
+        <line num="32" count="81" type="stmt"/>
+        <line num="34" count="81" type="stmt"/>
+        <line num="67" count="81" type="stmt"/>
+        <line num="68" count="404" type="stmt"/>
+        <line num="74" count="78" type="stmt"/>
+        <line num="76" count="4" type="stmt"/>
+        <line num="79" count="3" type="stmt"/>
+        <line num="83" count="5" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.docs">
+      <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="swagger.ts" path="C:\Users\mwrobel\OneDrive - TRANSITION TECHNOLOGIES PSC S.A\Desktop\magisterka\charging-station\src\docs\swagger.ts">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="4" type="stmt"/>
+        <line num="2" count="4" type="stmt"/>
+        <line num="4" count="4" type="stmt"/>
+        <line num="16" count="4" type="stmt"/>
+        <line num="17" count="4" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.middleware">
+      <metrics statements="32" coveredstatements="32" conditionals="8" coveredconditionals="7" methods="8" coveredmethods="8"/>
+      <file name="auth.ts" path="C:\Users\mwrobel\OneDrive - TRANSITION TECHNOLOGIES PSC S.A\Desktop\magisterka\charging-station\src\middleware\auth.ts">
+        <metrics statements="32" coveredstatements="32" conditionals="8" coveredconditionals="7" methods="8" coveredmethods="8"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="5" count="16" type="stmt"/>
+        <line num="6" count="16" type="stmt"/>
+        <line num="7" count="16" type="cond" truecount="1" falsecount="0"/>
+        <line num="8" count="13" type="cond" truecount="1" falsecount="0"/>
+        <line num="9" count="10" type="stmt"/>
+        <line num="10" count="10" type="stmt"/>
+        <line num="11" count="10" type="cond" truecount="1" falsecount="0"/>
+        <line num="12" count="7" type="stmt"/>
+        <line num="15" count="6" type="stmt"/>
+        <line num="16" count="6" type="stmt"/>
+        <line num="17" count="6" type="stmt"/>
+        <line num="18" count="3" type="stmt"/>
+        <line num="19" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="22" count="5" type="stmt"/>
+        <line num="26" count="10" type="stmt"/>
+        <line num="27" count="10" type="stmt"/>
+        <line num="28" count="10" type="stmt"/>
+        <line num="29" count="4" type="stmt"/>
+        <line num="30" count="2" type="stmt"/>
+        <line num="31" count="2" type="stmt"/>
+        <line num="33" count="8" type="stmt"/>
+        <line num="37" count="7" type="stmt"/>
+        <line num="38" count="7" type="stmt"/>
+        <line num="39" count="7" type="stmt"/>
+        <line num="41" count="7" type="cond" truecount="1" falsecount="0"/>
+        <line num="43" count="5" type="cond" truecount="3" falsecount="0"/>
+        <line num="44" count="2" type="stmt"/>
+        <line num="47" count="3" type="stmt"/>
+        <line num="50" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.models">
+      <metrics statements="16" coveredstatements="16" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
+      <file name="chargingStation.model.ts" path="C:\Users\mwrobel\OneDrive - TRANSITION TECHNOLOGIES PSC S.A\Desktop\magisterka\charging-station\src\models\chargingStation.model.ts">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="5" type="stmt"/>
+        <line num="2" count="5" type="stmt"/>
+        <line num="13" count="5" type="stmt"/>
+        <line num="14" count="5" type="stmt"/>
+        <line num="52" count="5" type="stmt"/>
+        <line num="58" count="5" type="stmt"/>
+      </file>
+      <file name="chargingStationType.model.ts" path="C:\Users\mwrobel\OneDrive - TRANSITION TECHNOLOGIES PSC S.A\Desktop\magisterka\charging-station\src\models\chargingStationType.model.ts">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="1" count="5" type="stmt"/>
+        <line num="11" count="5" type="stmt"/>
+        <line num="12" count="5" type="stmt"/>
+        <line num="60" count="5" type="stmt"/>
+      </file>
+      <file name="connector.model.ts" path="C:\Users\mwrobel\OneDrive - TRANSITION TECHNOLOGIES PSC S.A\Desktop\magisterka\charging-station\src\models\connector.model.ts">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="5" type="stmt"/>
+        <line num="2" count="5" type="stmt"/>
+        <line num="11" count="5" type="stmt"/>
+        <line num="12" count="5" type="stmt"/>
+        <line num="42" count="5" type="stmt"/>
+        <line num="48" count="5" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.router">
+      <metrics statements="291" coveredstatements="269" conditionals="92" coveredconditionals="88" methods="37" coveredmethods="37"/>
+      <file name="chargingstation.ts" path="C:\Users\mwrobel\OneDrive - TRANSITION TECHNOLOGIES PSC S.A\Desktop\magisterka\charging-station\src\router\chargingstation.ts">
+        <metrics statements="90" coveredstatements="81" conditionals="31" coveredconditionals="30" methods="10" coveredmethods="10"/>
+        <line num="1" count="4" type="stmt"/>
+        <line num="2" count="4" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="4" count="4" type="stmt"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
+        <line num="9" count="4" type="stmt"/>
+        <line num="39" count="10" type="stmt"/>
+        <line num="40" count="10" type="stmt"/>
+        <line num="41" count="10" type="stmt"/>
+        <line num="43" count="10" type="cond" truecount="3" falsecount="0"/>
+        <line num="44" count="1" type="stmt"/>
+        <line num="47" count="9" type="cond" truecount="1" falsecount="0"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="51" count="7" type="cond" truecount="3" falsecount="0"/>
+        <line num="52" count="2" type="stmt"/>
+        <line num="55" count="5" type="stmt"/>
+        <line num="56" count="5" type="stmt"/>
+        <line num="58" count="5" type="cond" truecount="1" falsecount="0"/>
+        <line num="59" count="1" type="stmt"/>
+        <line num="60" count="1" type="stmt"/>
+        <line num="63" count="4" type="stmt"/>
+        <line num="65" count="2" type="stmt"/>
+        <line num="66" count="2" type="stmt"/>
+        <line num="68" count="7" type="stmt"/>
+        <line num="69" count="7" type="stmt"/>
+        <line num="155" count="6" type="stmt"/>
+        <line num="156" count="6" type="stmt"/>
+        <line num="157" count="6" type="stmt"/>
+        <line num="158" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="159" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="161" count="6" type="stmt"/>
+        <line num="163" count="6" type="cond" truecount="1" falsecount="0"/>
+        <line num="164" count="6" type="cond" truecount="1" falsecount="0"/>
+        <line num="165" count="6" type="cond" truecount="1" falsecount="0"/>
+        <line num="166" count="6" type="cond" truecount="1" falsecount="0"/>
+        <line num="167" count="6" type="cond" truecount="1" falsecount="0"/>
+        <line num="169" count="6" type="stmt"/>
+        <line num="176" count="6" type="cond" truecount="1" falsecount="0"/>
+        <line num="177" count="6" type="stmt"/>
+        <line num="178" count="14" type="stmt"/>
+        <line num="179" count="14" type="stmt"/>
+        <line num="180" count="14" type="stmt"/>
+        <line num="182" count="6" type="stmt"/>
+        <line num="183" count="6" type="stmt"/>
+        <line num="186" count="0" type="stmt"/>
+        <line num="187" count="0" type="stmt"/>
+        <line num="228" count="4" type="stmt"/>
+        <line num="229" count="3" type="stmt"/>
+        <line num="230" count="3" type="stmt"/>
+        <line num="231" count="3" type="stmt"/>
+        <line num="233" count="3" type="stmt"/>
+        <line num="237" count="3" type="cond" truecount="1" falsecount="0"/>
+        <line num="238" count="2" type="stmt"/>
+        <line num="239" count="2" type="stmt"/>
+        <line num="242" count="1" type="stmt"/>
+        <line num="243" count="1" type="stmt"/>
+        <line num="245" count="1" type="stmt"/>
+        <line num="246" count="1" type="stmt"/>
+        <line num="248" count="0" type="stmt"/>
+        <line num="249" count="0" type="stmt"/>
+        <line num="287" count="7" type="stmt"/>
+        <line num="288" count="7" type="stmt"/>
+        <line num="289" count="7" type="stmt"/>
+        <line num="290" count="7" type="stmt"/>
+        <line num="292" count="7" type="stmt"/>
+        <line num="294" count="7" type="cond" truecount="4" falsecount="0"/>
+        <line num="295" count="2" type="stmt"/>
+        <line num="296" count="2" type="stmt"/>
+        <line num="299" count="5" type="cond" truecount="1" falsecount="0"/>
+        <line num="303" count="2" type="stmt"/>
+        <line num="304" count="2" type="stmt"/>
+        <line num="307" count="6" type="stmt"/>
+        <line num="309" count="3" type="cond" truecount="1" falsecount="0"/>
+        <line num="310" count="1" type="stmt"/>
+        <line num="311" count="1" type="stmt"/>
+        <line num="314" count="2" type="stmt"/>
+        <line num="315" count="2" type="stmt"/>
+        <line num="319" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="320" count="1" type="stmt"/>
+        <line num="321" count="1" type="stmt"/>
+        <line num="324" count="1" type="stmt"/>
+        <line num="325" count="1" type="stmt"/>
+        <line num="327" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="328" count="0" type="stmt"/>
+        <line num="329" count="0" type="stmt"/>
+        <line num="332" count="0" type="stmt"/>
+        <line num="333" count="0" type="stmt"/>
+        <line num="337" count="4" type="stmt"/>
+      </file>
+      <file name="chargingstationtype.ts" path="C:\Users\mwrobel\OneDrive - TRANSITION TECHNOLOGIES PSC S.A\Desktop\magisterka\charging-station\src\router\chargingstationtype.ts">
+        <metrics statements="69" coveredstatements="63" conditionals="18" coveredconditionals="18" methods="9" coveredmethods="9"/>
+        <line num="1" count="4" type="stmt"/>
+        <line num="2" count="4" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="4" count="4" type="stmt"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
+        <line num="9" count="4" type="stmt"/>
+        <line num="36" count="9" type="stmt"/>
+        <line num="37" count="9" type="stmt"/>
+        <line num="38" count="9" type="stmt"/>
+        <line num="39" count="9" type="cond" truecount="3" falsecount="0"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="42" count="8" type="stmt"/>
+        <line num="44" count="2" type="stmt"/>
+        <line num="45" count="2" type="stmt"/>
+        <line num="47" count="7" type="stmt"/>
+        <line num="48" count="7" type="stmt"/>
+        <line num="126" count="8" type="stmt"/>
+        <line num="127" count="8" type="stmt"/>
+        <line num="128" count="8" type="stmt"/>
+        <line num="129" count="8" type="cond" truecount="2" falsecount="0"/>
+        <line num="130" count="8" type="cond" truecount="2" falsecount="0"/>
+        <line num="132" count="8" type="stmt"/>
+        <line num="134" count="8" type="cond" truecount="1" falsecount="0"/>
+        <line num="135" count="8" type="cond" truecount="1" falsecount="0"/>
+        <line num="136" count="8" type="cond" truecount="1" falsecount="0"/>
+        <line num="137" count="8" type="cond" truecount="1" falsecount="0"/>
+        <line num="139" count="8" type="cond" truecount="3" falsecount="0"/>
+        <line num="140" count="1" type="stmt"/>
+        <line num="145" count="8" type="stmt"/>
+        <line num="150" count="8" type="stmt"/>
+        <line num="151" count="8" type="stmt"/>
+        <line num="153" count="0" type="stmt"/>
+        <line num="154" count="0" type="stmt"/>
+        <line num="189" count="4" type="stmt"/>
+        <line num="190" count="3" type="stmt"/>
+        <line num="191" count="3" type="stmt"/>
+        <line num="192" count="3" type="stmt"/>
+        <line num="194" count="3" type="stmt"/>
+        <line num="196" count="3" type="cond" truecount="1" falsecount="0"/>
+        <line num="197" count="2" type="stmt"/>
+        <line num="198" count="2" type="stmt"/>
+        <line num="201" count="1" type="stmt"/>
+        <line num="202" count="1" type="stmt"/>
+        <line num="204" count="0" type="stmt"/>
+        <line num="205" count="0" type="stmt"/>
+        <line num="243" count="7" type="stmt"/>
+        <line num="244" count="7" type="stmt"/>
+        <line num="245" count="7" type="stmt"/>
+        <line num="246" count="7" type="stmt"/>
+        <line num="248" count="7" type="stmt"/>
+        <line num="250" count="9" type="stmt"/>
+        <line num="252" count="7" type="cond" truecount="1" falsecount="0"/>
+        <line num="253" count="1" type="stmt"/>
+        <line num="254" count="1" type="stmt"/>
+        <line num="257" count="6" type="stmt"/>
+        <line num="258" count="6" type="stmt"/>
+        <line num="262" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="263" count="1" type="stmt"/>
+        <line num="264" count="1" type="stmt"/>
+        <line num="267" count="1" type="stmt"/>
+        <line num="268" count="1" type="stmt"/>
+        <line num="270" count="4" type="cond" truecount="1" falsecount="0"/>
+        <line num="271" count="4" type="stmt"/>
+        <line num="272" count="4" type="stmt"/>
+        <line num="275" count="0" type="stmt"/>
+        <line num="276" count="0" type="stmt"/>
+        <line num="280" count="4" type="stmt"/>
+      </file>
+      <file name="connector.ts" path="C:\Users\mwrobel\OneDrive - TRANSITION TECHNOLOGIES PSC S.A\Desktop\magisterka\charging-station\src\router\connector.ts">
+        <metrics statements="108" coveredstatements="102" conditionals="40" coveredconditionals="39" methods="14" coveredmethods="14"/>
+        <line num="1" count="4" type="stmt"/>
+        <line num="2" count="4" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="4" count="4" type="stmt"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
+        <line num="9" count="4" type="stmt"/>
+        <line num="10" count="4" type="stmt"/>
+        <line num="12" count="12" type="stmt"/>
+        <line num="13" count="12" type="cond" truecount="1" falsecount="0"/>
+        <line num="14" count="4" type="stmt"/>
+        <line num="17" count="4" type="cond" truecount="1" falsecount="0"/>
+        <line num="18" count="4" type="stmt"/>
+        <line num="23" count="7" type="stmt"/>
+        <line num="24" count="7" type="cond" truecount="3" falsecount="1"/>
+        <line num="25" count="7" type="stmt"/>
+        <line num="31" count="7" type="cond" truecount="1" falsecount="0"/>
+        <line num="32" count="2" type="stmt"/>
+        <line num="62" count="9" type="stmt"/>
+        <line num="63" count="9" type="stmt"/>
+        <line num="64" count="9" type="stmt"/>
+        <line num="66" count="9" type="cond" truecount="3" falsecount="0"/>
+        <line num="67" count="1" type="stmt"/>
+        <line num="70" count="8" type="cond" truecount="1" falsecount="0"/>
+        <line num="71" count="1" type="stmt"/>
+        <line num="74" count="7" type="stmt"/>
+        <line num="75" count="7" type="stmt"/>
+        <line num="77" count="7" type="cond" truecount="1" falsecount="0"/>
+        <line num="78" count="1" type="stmt"/>
+        <line num="79" count="1" type="stmt"/>
+        <line num="84" count="6" type="stmt"/>
+        <line num="86" count="4" type="stmt"/>
+        <line num="88" count="3" type="stmt"/>
+        <line num="90" count="2" type="stmt"/>
+        <line num="91" count="2" type="stmt"/>
+        <line num="93" count="6" type="stmt"/>
+        <line num="94" count="6" type="stmt"/>
+        <line num="164" count="7" type="stmt"/>
+        <line num="165" count="7" type="stmt"/>
+        <line num="166" count="7" type="stmt"/>
+        <line num="167" count="7" type="cond" truecount="2" falsecount="0"/>
+        <line num="168" count="7" type="cond" truecount="2" falsecount="0"/>
+        <line num="170" count="7" type="stmt"/>
+        <line num="172" count="7" type="cond" truecount="1" falsecount="0"/>
+        <line num="173" count="7" type="cond" truecount="1" falsecount="0"/>
+        <line num="174" count="7" type="cond" truecount="1" falsecount="0"/>
+        <line num="176" count="7" type="stmt"/>
+        <line num="183" count="7" type="cond" truecount="1" falsecount="0"/>
+        <line num="184" count="7" type="stmt"/>
+        <line num="185" count="7" type="stmt"/>
+        <line num="186" count="7" type="stmt"/>
+        <line num="187" count="7" type="stmt"/>
+        <line num="189" count="7" type="stmt"/>
+        <line num="190" count="7" type="stmt"/>
+        <line num="193" count="0" type="stmt"/>
+        <line num="194" count="0" type="stmt"/>
+        <line num="234" count="4" type="stmt"/>
+        <line num="235" count="3" type="stmt"/>
+        <line num="236" count="3" type="stmt"/>
+        <line num="237" count="3" type="stmt"/>
+        <line num="239" count="3" type="stmt"/>
+        <line num="243" count="3" type="cond" truecount="1" falsecount="0"/>
+        <line num="244" count="2" type="stmt"/>
+        <line num="245" count="2" type="stmt"/>
+        <line num="248" count="1" type="stmt"/>
+        <line num="249" count="1" type="stmt"/>
+        <line num="251" count="1" type="stmt"/>
+        <line num="252" count="1" type="stmt"/>
+        <line num="254" count="0" type="stmt"/>
+        <line num="255" count="0" type="stmt"/>
+        <line num="291" count="8" type="stmt"/>
+        <line num="292" count="8" type="stmt"/>
+        <line num="293" count="8" type="stmt"/>
+        <line num="294" count="8" type="stmt"/>
+        <line num="295" count="8" type="stmt"/>
+        <line num="296" count="8" type="stmt"/>
+        <line num="298" count="8" type="stmt"/>
+        <line num="300" count="9" type="stmt"/>
+        <line num="302" count="8" type="cond" truecount="1" falsecount="0"/>
+        <line num="303" count="1" type="stmt"/>
+        <line num="304" count="1" type="stmt"/>
+        <line num="307" count="7" type="cond" truecount="3" falsecount="0"/>
+        <line num="308" count="1" type="stmt"/>
+        <line num="309" count="1" type="stmt"/>
+        <line num="312" count="6" type="stmt"/>
+        <line num="313" count="6" type="cond" truecount="3" falsecount="0"/>
+        <line num="315" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="316" count="3" type="stmt"/>
+        <line num="319" count="3" type="cond" truecount="4" falsecount="0"/>
+        <line num="321" count="3" type="stmt"/>
+        <line num="324" count="6" type="stmt"/>
+        <line num="326" count="4" type="cond" truecount="1" falsecount="0"/>
+        <line num="327" count="3" type="stmt"/>
+        <line num="331" count="3" type="cond" truecount="1" falsecount="0"/>
+        <line num="332" count="3" type="stmt"/>
+        <line num="337" count="3" type="stmt"/>
+        <line num="339" count="3" type="cond" truecount="1" falsecount="0"/>
+        <line num="340" count="1" type="stmt"/>
+        <line num="341" count="1" type="stmt"/>
+        <line num="344" count="2" type="stmt"/>
+        <line num="345" count="2" type="stmt"/>
+        <line num="347" count="3" type="cond" truecount="3" falsecount="0"/>
+        <line num="348" count="3" type="stmt"/>
+        <line num="349" count="3" type="stmt"/>
+        <line num="352" count="0" type="stmt"/>
+        <line num="353" count="0" type="stmt"/>
+        <line num="357" count="4" type="stmt"/>
+      </file>
+      <file name="token.ts" path="C:\Users\mwrobel\OneDrive - TRANSITION TECHNOLOGIES PSC S.A\Desktop\magisterka\charging-station\src\router\token.ts">
+        <metrics statements="24" coveredstatements="23" conditionals="3" coveredconditionals="1" methods="4" coveredmethods="4"/>
+        <line num="1" count="4" type="stmt"/>
+        <line num="2" count="4" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="4" count="4" type="stmt"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="33" count="4" type="stmt"/>
+        <line num="34" count="2" type="stmt"/>
+        <line num="35" count="2" type="stmt"/>
+        <line num="36" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="43" count="1" type="stmt"/>
+        <line num="68" count="4" type="stmt"/>
+        <line num="69" count="1" type="stmt"/>
+        <line num="70" count="1" type="stmt"/>
+        <line num="71" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="72" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="74" count="1" type="stmt"/>
+        <line num="77" count="1" type="stmt"/>
+        <line num="78" count="1" type="stmt"/>
+        <line num="79" count="1" type="stmt"/>
+        <line num="81" count="0" type="stmt"/>
+        <line num="85" count="4" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.utils">
+      <metrics statements="20" coveredstatements="18" conditionals="8" coveredconditionals="8" methods="14" coveredmethods="12"/>
+      <file name="cache.ts" path="C:\Users\mwrobel\OneDrive - TRANSITION TECHNOLOGIES PSC S.A\Desktop\magisterka\charging-station\src\utils\cache.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="5" type="stmt"/>
+        <line num="2" count="5" type="stmt"/>
+        <line num="3" count="5" type="stmt"/>
+      </file>
+      <file name="logger.ts" path="C:\Users\mwrobel\OneDrive - TRANSITION TECHNOLOGIES PSC S.A\Desktop\magisterka\charging-station\src\utils\logger.ts">
+        <metrics statements="17" coveredstatements="15" conditionals="8" coveredconditionals="8" methods="14" coveredmethods="12"/>
+        <line num="1" count="4" type="stmt"/>
+        <line num="7" count="4" type="stmt"/>
+        <line num="11" count="323" type="cond" truecount="2" falsecount="0"/>
+        <line num="18" count="160" type="stmt"/>
+        <line num="22" count="10" type="stmt"/>
+        <line num="26" count="80" type="cond" truecount="2" falsecount="0"/>
+        <line num="30" count="6" type="stmt"/>
+        <line num="34" count="20" type="stmt"/>
+        <line num="38" count="21" type="stmt"/>
+        <line num="45" count="3" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="55" count="9" type="stmt"/>
+        <line num="61" count="10" type="stmt"/>
+        <line num="67" count="4" type="stmt"/>
+        <line num="73" count="0" type="stmt"/>
+        <line num="79" count="4" type="stmt"/>
+        <line num="81" count="4" type="stmt"/>
+      </file>
+    </package>
+    <package name="tests.fixtures">
+      <metrics statements="18" coveredstatements="18" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="db.ts" path="C:\Users\mwrobel\OneDrive - TRANSITION TECHNOLOGIES PSC S.A\Desktop\magisterka\charging-station\tests\fixtures\db.ts">
+        <metrics statements="18" coveredstatements="18" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="15" count="3" type="stmt"/>
+        <line num="22" count="3" type="stmt"/>
+        <line num="29" count="3" type="stmt"/>
+        <line num="36" count="3" type="stmt"/>
+        <line num="41" count="3" type="stmt"/>
+        <line num="46" count="3" type="stmt"/>
+        <line num="51" count="3" type="stmt"/>
+        <line num="57" count="3" type="stmt"/>
+        <line num="58" count="3" type="stmt"/>
+        <line num="59" count="3" type="stmt"/>
+        <line num="60" count="3" type="stmt"/>
+        <line num="61" count="3" type="stmt"/>
+        <line num="62" count="3" type="stmt"/>
+        <line num="63" count="3" type="stmt"/>
+        <line num="64" count="3" type="stmt"/>
+        <line num="65" count="3" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>
