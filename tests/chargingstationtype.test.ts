@@ -5,7 +5,7 @@ import { UUIDV4 } from 'sequelize';
 import { chargingStationType1 } from './fixtures/db';
 import { ChargingStationType } from '../src/models/chargingStationType.model';
 
-const url = '/cstype';
+const url = '/api/v1/cstype';
 let chargingStationType1Id: string;
 
 jest.mock('../src/middleware/auth', () => ({

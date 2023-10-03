@@ -35,7 +35,7 @@ const plugCountValidation = async (chargingStation: ChargingStation, chargingSta
 
 /**
  * @openapi
- * /connector:
+ * /api/v1/connector:
  *   post:
  *     tags:
  *       - Connectors
@@ -97,7 +97,7 @@ router.post('/connector', auth, async (req: Request, res: Response) => {
 
 /**
  * @openapi
- * /connector:
+ * /api/v1/connector:
  *   get:
  *     tags:
  *       - Connectors
@@ -169,8 +169,6 @@ router.get('/connector', auth, async (req: Request, res: Response) => {
 
 		const where: any = {};
 
-		console.log(typeof req.query.priority);
-
 		if (req.query.name) where.name = req.query.name;
 		if (req.query.priority) where.priority = req.query.priority;
 		if (req.query.charging_station_id) where.charging_station_id = req.query.charging_station_id;
@@ -199,7 +197,7 @@ router.get('/connector', auth, async (req: Request, res: Response) => {
 
 /**
  * @openapi
- * /connector/{id}:
+ * /api/v1/connector/{id}:
  *   get:
  *     tags:
  *       - Connectors
@@ -260,7 +258,7 @@ router.get('/connector/:id', auth, async (req: Request, res: Response) => {
 
 /**
  * @openapi
- * /connector/{id}:
+ * /api/v1/connector/{id}:
  *   patch:
  *     tags:
  *       - Connectors

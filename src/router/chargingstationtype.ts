@@ -10,7 +10,7 @@ const chargingStationTypeName = ChargingStationType.name;
 
 /**
  * @openapi
- * /cstype:
+ * /api/v1/cstype:
  *   post:
  *     tags:
  *       - Charging Station Types
@@ -51,7 +51,7 @@ router.post('/cstype', auth, async (req: Request, res: Response) => {
 
 /**
  * @openapi
- * /cstype:
+ * /api/v1/cstype:
  *   get:
  *     tags:
  *       - Charging Station Types
@@ -157,7 +157,7 @@ router.get('/cstype', auth, async (req: Request, res: Response) => {
 
 /**
  * @openapi
- * /cstype/{id}:
+ * /api/v1/cstype/{id}:
  *   get:
  *     tags:
  *       - Charging Station Types
@@ -208,7 +208,7 @@ router.get('/cstype/:id', auth, async (req: Request, res: Response) => {
 
 /**
  * @openapi
- * /cstype/{id}:
+ * /api/v1/cstype/{id}:
  *   patch:
  *     tags:
  *       - Charging Station Types

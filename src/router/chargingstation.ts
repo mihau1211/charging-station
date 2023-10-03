@@ -10,7 +10,7 @@ const chargingStationName = ChargingStation.name;
 
 /**
  * @openapi
- * /cs:
+ * /api/v1/cs:
  *   post:
  *     tags:
  *       - Charging Stations
@@ -72,7 +72,7 @@ router.post('/cs', auth, async (req: Request, res: Response) => {
 
 /**
  * @openapi
- * /cs:
+ * /api/v1/cs:
  *   get:
  *     tags:
  *       - Charging Stations
@@ -190,7 +190,7 @@ router.get('/cs', auth, async (req: Request, res: Response) => {
 
 /**
  * @openapi
- * /cs/{id}:
+ * /api/v1/cs/{id}:
  *   get:
  *     tags:
  *       - Charging Stations
@@ -252,7 +252,7 @@ router.get('/cs/:id', auth, async (req: Request, res: Response) => {
 
 /**
  * @openapi
- * /cs/{id}:
+ * /api/v1/cs/{id}:
  *   patch:
  *     tags:
  *       - Charging Stations

@@ -11,7 +11,7 @@ interface RequestWithToken extends Request {
 
 /**
  * @swagger
- * /generatetoken:
+ * /api/v1/generatetoken:
  *   post:
  *     tags:
  *       - Authentication
@@ -46,7 +46,7 @@ router.post('/generatetoken', generateTokenAuth, async (req: Request, res: Respo
 
 /**
  * @swagger
- * /refreshtoken:
+ * /api/v1/refreshtoken:
  *   post:
  *     tags:
  *       - Authentication
