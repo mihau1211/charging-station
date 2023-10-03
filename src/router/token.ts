@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import cache from '../utils/cache';
 import { refreshTokenAuth, generateTokenAuth } from '../middleware/auth';
+import logger from '../utils/logger';
 
 const router = express.Router();
 
@@ -31,6 +32,7 @@ interface RequestWithToken extends Request {
  *         description: Forbidden
  */
 router.post('/generatetoken', generateTokenAuth, async (req: Request, res: Response) => {
+	logger.beginLogger('POST', '/generatetoken', req.body);
 	const secret = process.env.JWT_SECRET;
 	try {
 		if (!secret) throw new Error('JWT Secret is missing');
@@ -38,8 +40,10 @@ router.post('/generatetoken', generateTokenAuth, async (req: Request, res: Respo
 			expiresIn: '120s',
 		});
 		cache.set(token, 'true');
+		logger.info('Token generated successfully', 'API');
 		res.send({ token });
 	} catch (error: any) {
+		logger.error('Error while generating token', 'API');
 		res.status(400).send({ error: error.message });
 	}
 });
@@ -54,7 +58,7 @@ router.post('/generatetoken', generateTokenAuth, async (req: Request, res: Respo
  *     security:
  *       - bearerAuth: []
  *     responses:
-*       200:
+ *       200:
  *         description: A successful response with JWT token
  *         content:
  *           application/json:
@@ -66,6 +70,7 @@ router.post('/generatetoken', generateTokenAuth, async (req: Request, res: Respo
  *         description: Unauthorized
  */
 router.post('/refreshtoken', refreshTokenAuth, async (req: RequestWithToken, res: Response) => {
+	logger.beginLogger('POST', '/generatetoken', req.body);
 	const secret = process.env.JWT_SECRET;
 	try {
 		if (!secret) throw new Error('JWT Secret is missing');
@@ -76,8 +81,10 @@ router.post('/refreshtoken', refreshTokenAuth, async (req: RequestWithToken, res
 		});
 		cache.del(req.token);
 		cache.set(token, 'true');
+		logger.info('Token generated successfully', 'API');
 		res.send({ token: token });
 	} catch (error: any) {
+		logger.error('Error while refreshing token', 'API');
 		res.status(400).send({ error: error.message });
 	}
 });
