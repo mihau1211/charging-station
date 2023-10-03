@@ -146,7 +146,7 @@ router.post('/connector', auth, async (req: Request, res: Response) => {
  *         description: A JSON array of connectors
  *         content:
  *           application/json:
- *             example: 
+ *             example:
  *               - id: "123e4567-e89b-12d3-a456-426614174000"
  *                 name: "Connector1"
  *                 priority: true
@@ -214,11 +214,11 @@ router.get('/connector', auth, async (req: Request, res: Response) => {
  *         description: A Connector object.
  *         content:
  *           application/json:
- *             example: 
+ *             example:
  *               id: "123e4567-e89b-12d3-a456-426614174000"
  *               name: "Connector A"
  *               priority: false
- *               charging_station: 
+ *               charging_station:
  *                 id: "123e4567-e89b-12d3-a456-426614174000"
  *                 name: "ChargingStation1"
  *                 device_id: "123e4567-e89b-12d3-a456-426614174001"

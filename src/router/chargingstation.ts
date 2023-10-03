@@ -136,13 +136,13 @@ router.post('/cs', auth, async (req: Request, res: Response) => {
  *         description: Successfully retrieved list of Charging Stations.
  *         content:
  *           application/json:
- *             example: 
+ *             example:
  *               - id: "123e4567-e89b-12d3-a456-426614174000"
  *                 name: "ChargingStation1"
  *                 device_id: "123e4567-e89b-12d3-a456-426614174001"
  *                 ip_address: "192.168.1.1"
  *                 firmware_version: "1.0.0"
- *                 charging_station_type: 
+ *                 charging_station_type:
  *                   id: "123e4567-e89b-12d3-a456-426614174000"
  *                   name: "Type A"
  *                   plug_count: 2
@@ -207,13 +207,13 @@ router.get('/cs', auth, async (req: Request, res: Response) => {
  *         description: A Charging Station object.
  *         content:
  *           application/json:
- *             example: 
+ *             example:
  *               id: "123e4567-e89b-12d3-a456-426614174000"
  *               name: "Station A"
  *               device_id: "123e4567-e89b-12d3-a456-426614174000"
  *               ip_address: "192.168.1.1"
  *               firmware_version: "1.0.0"
- *               charging_station_type: 
+ *               charging_station_type:
  *                 id: "123e4567-e89b-12d3-a456-426614174000"
  *                 name: "Type A"
  *                 plug_count: 2

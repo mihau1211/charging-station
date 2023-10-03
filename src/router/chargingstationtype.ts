@@ -113,7 +113,7 @@ router.post('/cstype', auth, async (req: Request, res: Response) => {
  *         description: Successfully retrieved list of Charging Station Types.
  *         content:
  *           application/json:
- *             example: 
+ *             example:
  *               - id: "123e4567-e89b-12d3-a456-426614174000"
  *                 name: "Type A"
  *                 plug_count: 2
@@ -174,7 +174,7 @@ router.get('/cstype', auth, async (req: Request, res: Response) => {
  *         description: A Charging Station Type object.
  *         content:
  *           application/json:
- *             example: 
+ *             example:
  *               id: "123e4567-e89b-12d3-a456-426614174000"
  *               name: "Type A"
  *               plug_count: 2
