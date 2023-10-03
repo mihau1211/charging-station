@@ -1,4 +1,6 @@
 import express from 'express';
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from './docs/swagger';
 import { initializeDatabase } from './db/dbinit';
 import chargingStationTypeRouter from './router/chargingstationtype';
 import chargingStationRouter from './router/chargingstation';
@@ -10,9 +12,10 @@ const app = express();
 initializeDatabase();
 
 app.use(express.json());
-app.use(chargingStationTypeRouter);
-app.use(chargingStationRouter);
-app.use(connectorRouter);
-app.use(tokenRouter);
+app.use('/api/v1', chargingStationTypeRouter);
+app.use('/api/v1', chargingStationRouter);
+app.use('/api/v1', connectorRouter);
+app.use('/api/v1', tokenRouter);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 export default app;

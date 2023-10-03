@@ -6,7 +6,7 @@ import { chargingStationType1, chargingStationType2, chargingStation1, chargingS
 import { ChargingStationType } from '../src/models/chargingStationType.model';
 import { ChargingStation } from '../src/models/chargingStation.model';
 
-const url = '/cs';
+const url = '/api/v1/cs';
 let chargingStationType1Id: string;
 let chargingStationType2Id: string;
 let chargingStation1Id: string;

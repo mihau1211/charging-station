@@ -15,7 +15,7 @@ describe('Authorization endpoints tests', () => {
 
     test('should generate token', async () => {
         const response = await request(app)
-            .post('/generatetoken')
+            .post('/api/v1/generatetoken')
             .set('x-api-key', `${process.env.API_KEY}`)
             .send();
 
@@ -27,7 +27,7 @@ describe('Authorization endpoints tests', () => {
         delete process.env.API_KEY;
 
         const response = await request(app)
-            .post('/generatetoken')
+            .post('/api/v1/generatetoken')
             .set('x-api-key', `${process.env.API_KEY}`)
             .send();
 
@@ -38,7 +38,7 @@ describe('Authorization endpoints tests', () => {
         delete process.env.JWT_SECRET;
 
         const response = await request(app)
-            .post('/generatetoken')
+            .post('/api/v1/generatetoken')
             .set('x-api-key', `${process.env.API_KEY}`)
             .send();
 
@@ -48,7 +48,7 @@ describe('Authorization endpoints tests', () => {
     test('should refresh token', async () => {
         cache.set(validToken, 'true');
         const response = await request(app)
-            .post('/refreshtoken')
+            .post('/api/v1/refreshtoken')
             .set('Authorization', `Bearer ${validToken}`)
             .send();
 
@@ -58,7 +58,7 @@ describe('Authorization endpoints tests', () => {
 
     test('should return 401 and not refresh token when validToken is not in cache', async () => {
         const response = await request(app)
-            .post('/refreshtoken')
+            .post('/api/v1/refreshtoken')
             .set('Authorization', `Bearer ${validToken}`)
             .send();
 
@@ -68,7 +68,7 @@ describe('Authorization endpoints tests', () => {
     test('should return 401 and not refresh token when token is invalid', async () => {
         cache.set('sometoken', 'true')
         const response = await request(app)
-            .post('/refreshtoken')
+            .post('/api/v1/refreshtoken')
             .set('Authorization', `Bearer sometoken`)
             .send();
 
@@ -77,7 +77,7 @@ describe('Authorization endpoints tests', () => {
 
     test('should return 401 and not refresh token when token is not provided', async () => {
         const response = await request(app)
-            .post('/refreshtoken')
+            .post('/api/v1/refreshtoken')
             .send();
 
         expect(response.status).toBe(401);
@@ -87,7 +87,7 @@ describe('Authorization endpoints tests', () => {
         delete process.env.JWT_SECRET;
 
         const response = await request(app)
-            .post('/refreshtoken')
+            .post('/api/v1/refreshtoken')
             .set('Authorization', `Bearer ${validToken}`)
             .send();
 

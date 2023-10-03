@@ -7,7 +7,7 @@ import { ChargingStationType } from '../src/models/chargingStationType.model';
 import { ChargingStation } from '../src/models/chargingStation.model';
 import { Connector } from '../src/models/connector.model';
 
-const url = '/connector';
+const url = '/api/v1/connector';
 let chargingStationType1Id: string;
 let chargingStation1Id: string;
 let connector1Id: string;
