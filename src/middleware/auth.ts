@@ -1,6 +1,7 @@
 import { NextFunction } from 'express';
 import cache from '../utils/cache';
 import jwt from 'jsonwebtoken';
+import logger from '../utils/logger';
 
 const validate = async (req: any) => {
 	const secret = process.env.JWT_SECRET;
@@ -19,6 +20,7 @@ const auth = async (req: any, res: any, next: NextFunction) => {
 		if (typeof decoded === 'string') throw new Error();
 		next();
 	} catch (error: any) {
+		logger.error('Authentication failure', 'API');
 		res.status(401).send({ error: error.message });
 	}
 };
@@ -30,6 +32,7 @@ const refreshTokenAuth = async (req: any, res: any, next: Function) => {
 		req.token = token;
 		next();
 	} catch (error: any) {
+		logger.error('Authentication failure', 'API');
 		res.status(401).send({ error: error.message });
 	}
 };
@@ -41,6 +44,7 @@ const generateTokenAuth = async (req: any, res: any, next: Function) => {
 	if (!validApiKey) return res.status(403).send({ error: 'No valid API key is set in the environment' });
 
 	if (!apiKey || apiKey !== validApiKey) {
+		logger.error('Authentication failure: wrong API Key', 'API');
 		return res.status(403).send({ error: 'Invalid API Key' });
 	}
 
